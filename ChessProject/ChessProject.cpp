@@ -1,11 +1,9 @@
-
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
 //definitions
-#define MODE_WIDTH 1100
-#define MODE_HEIGHT 800
+#define MODE_WIDTH 1200
+#define MODE_HEIGHT 900
 
 using namespace std;
 using namespace sf;
