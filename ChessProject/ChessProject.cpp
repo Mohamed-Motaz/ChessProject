@@ -2,10 +2,23 @@
 //
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
+using namespace std;
+using namespace sf;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+
+    RenderWindow window(VideoMode(1100, 800), "Chess Game");
+
+    while (window.isOpen()) {
+        Event evnt;
+        while (window.pollEvent(evnt)) {
+            
+
+        }
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
