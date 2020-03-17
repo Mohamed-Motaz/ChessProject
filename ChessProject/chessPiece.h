@@ -10,20 +10,14 @@ using namespace std;
 using namespace sf;
 class chessPiece
 {
+public:
 	string team;
 	string type;
 	pair<ll, ll> position;
 	bool isAlive;
 
 	pair<ll, ll> getPos();
-	bool isValid(ll x, ll y);
-	vector<pair<ll, ll>> getAvailableSquares();
-	vector<pair<ll, ll>> getBishopSquares();
-	vector<pair<ll, ll>> getKnightSquares();
-	vector<pair<ll, ll>> getQueenSquares();
-	vector<pair<ll, ll>> getPawnSquares();
-	vector<pair<ll, ll>> getRookSquares();
-	vector<pair<ll, ll>> getKingSquares();
-
+	chessPiece(string team, string type, pair<ll, ll> position, bool isAlive);
+	chessPiece();
 };
 
