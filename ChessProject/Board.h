@@ -13,6 +13,6 @@ using namespace sf;
 class Board
 {
 public:
-	chessPiece board[8][8];
+	chessPiece board[9][9];
 };
 

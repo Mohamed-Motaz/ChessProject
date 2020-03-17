@@ -18,12 +18,12 @@ getAvailableSquares::getAvailableSquares()
 vector<pair<ll, ll>> getAvailableSquares::getSquares() {
 	
 	vector<pair<ll, ll>> answer;
-	if (piece.type == "bishop") answer = getBishopSquares();
-	if (piece.type == "knight") answer = getKnightSquares();
-	if (piece.type == "king") answer = getQueenSquares();
-	if (piece.type == "queen") answer = getPawnSquares();
-	if (piece.type == "pawn") answer = getRookSquares();
-	if (piece.type == "rook") answer = getKingSquares();
+	if (piece.type == "Bishop") answer = getBishopSquares();
+	if (piece.type == "Knight") answer = getKnightSquares();
+	if (piece.type == "King") answer = getQueenSquares();
+	if (piece.type == "Queen") answer = getPawnSquares();
+	if (piece.type == "Pawn") answer = getRookSquares();
+	if (piece.type == "Rook") answer = getKingSquares();
 	return answer;
 }
 getAvailableSquares::getAvailableSquares(chessPiece piece, Board board)
