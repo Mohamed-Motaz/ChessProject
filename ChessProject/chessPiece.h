@@ -16,7 +16,7 @@ class chessPiece
 	bool isAlive;
 
 	pair<ll, ll> getPos();
-
+	bool isValid(ll x, ll y);
 	vector<pair<ll, ll>> getAvailableSquares();
 	vector<pair<ll, ll>> getBishopSquares();
 	vector<pair<ll, ll>> getKnightSquares();
