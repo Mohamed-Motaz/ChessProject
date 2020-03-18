@@ -239,38 +239,14 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
     //return a vector of all valid squares for the bishop
     //can move one square only anywhere
     vector<pair<ll, ll>> answer;
-    if (isValid(piece.getPos().first - 1, piece.getPos().second))
-    {
-        answer.push_back({ piece.getPos().first - 1, piece.getPos().second });
-    }
-    if (isValid(piece.getPos().first + 1, piece.getPos().second))
-    {
-        answer.push_back({ piece.getPos().first + 1, piece.getPos().second });
-    }
-    if (isValid(piece.getPos().first, piece.getPos().second - 1))
-    {
-        answer.push_back({ piece.getPos().first, piece.getPos().second - 1 });
-    }
-    if (isValid(piece.getPos().first, piece.getPos().second + 1))
-    {
-        answer.push_back({piece.getPos().first, piece.getPos().second + 1});
-    }
-    if (isValid(piece.getPos().first - 1, piece.getPos().second - 1))
-    {
-        answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 1});
-    }
-    if(isValid(piece.getPos().first + 1, piece.getPos().second  + 1))
-    {
-        answer.push_back({ piece.getPos().first + 1, piece.getPos().second  + 1});
-    }
-    if (isValid(piece.getPos().first + 1, piece.getPos().second - 1))
-    {
-        answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 1 });
-    }
-    if (isValid(piece.getPos().first - 1, piece.getPos().second + 1 ))
-    {
-        answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 1 });
-    }
-
+ int xaxis[]={1,1,1,-1,-1,-1,0,0};
+ int yaxis[]={1,0,-1,-1,1,0,1,-1};
+ for (int i=0; i<8; i++)
+ {
+     if (isValid(piece.getpos().first+xaxis[i],piece.getpos().second+yaxis[i]))
+     {
+         answer.push_back({piece.getpos().first+xaxis[i],piece.getpos().second+yaxis[i]});
+     }
+ }
     return answer;
 }
