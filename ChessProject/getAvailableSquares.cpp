@@ -16,7 +16,7 @@ getAvailableSquares::getAvailableSquares()
 }
 
 vector<pair<ll, ll>> getAvailableSquares::getSquares() {
-	
+
 	vector<pair<ll, ll>> answer;
 	if (piece.type == "Bishop") answer = getBishopSquares();
 	if (piece.type == "Knight") answer = getKnightSquares();
@@ -54,12 +54,89 @@ vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
 	//can move in any direction
 	vector<pair<ll, ll>> answer;
 
+	if (isValid(piece.getPos().first - 1, piece.getPos().second - 2)) {
+
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 2 });
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 2 });
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second + 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second + 1 });
+	}
+
 	return answer;
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move horizontally, vertically, and diagonaly
 	vector<pair<ll, ll>> answer;
+
+	int axis[] = { 1,-1 };
+
+
+	for (int i = 0; i < 2; i++) {
+
+		int xpos = piece.getPos().first + axis[i];
+
+		while (isValid(xpos, piece.getPos().second)) {
+
+			answer.push_back({ xpos , piece.getPos().second });
+
+			xpos += axis[i];
+
+		}
+
+		for (int j = 0; j < 2; j++) {
+
+			int ypos = piece.getPos().second + axis[j];
+
+			while (isValid(xpos, ypos)) {
+
+				answer.push_back({ xpos , ypos });
+
+				xpos += axis[i];
+
+				ypos += axis[j];
+
+			}
+
+		}
+
+		int ypos = piece.getPos().second + axis[i];
+
+		while (isValid(piece.getPos().first, ypos)) {
+
+			answer.push_back({ piece.getPos().first, ypos });
+
+			ypos += axis[i];
+		}
+
+
+	}
 
 	return answer;
 }
@@ -89,6 +166,35 @@ vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move vertically or horizontally
 	vector<pair<ll, ll>> answer;
+
+	int Xrook1 = piece.getPos().first + 1;
+	int Xrook2 = piece.getPos().first - 1;
+	int Yrook1 = piece.getPos().second + 1;
+	int Yrook2 = piece.getPos().second - 1;
+	while (isValid(Xrook1, piece.getPos().second)) {
+
+		answer.push_back({ Xrook1 , piece.getPos().second });
+
+		Xrook1++;
+	}
+	while (isValid(Xrook2, piece.getPos().second)) {
+		answer.push_back({ Xrook2 , piece.getPos().second });
+
+		Xrook2--;
+	}
+	while (isValid(piece.getPos().first, Yrook1)) {
+
+		answer.push_back({ piece.getPos().first,Yrook1 });
+
+		Yrook1++;
+	}
+	while (isValid(piece.getPos().first, Yrook2)) {
+
+		answer.push_back({ piece.getPos().first, Yrook2 });
+
+		Yrook2--;
+	}
+
 
 	return answer;
 }

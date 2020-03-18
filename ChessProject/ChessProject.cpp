@@ -87,7 +87,7 @@ int main()
         window.clear();
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-               
+                if (board1.board == NULL) cout << "YAY";
                 cout << board1.board[i][j].type << " ";
 
             }cout << endl;
