@@ -12,7 +12,15 @@ using namespace sf;
 
 class Board
 {
-public:
-	chessPiece board[9][9];
-};
+private:
+    /* Here will be the instance stored. */
+    
 
+    /* Private constructor to prevent instancing. */
+   Board();
+
+public:
+    /* Static access method. */
+    static Board &Instance();
+    chessPiece board[9][9];
+};

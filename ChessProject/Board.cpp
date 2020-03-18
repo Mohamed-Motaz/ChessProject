@@ -10,3 +10,17 @@
 using namespace std;
 using namespace sf;
 
+static Board* singleBoard;
+
+Board::Board() {
+	
+}
+
+Board &Board::Instance()
+{
+	if (!singleBoard) {
+		singleBoard = new Board();
+	}
+	return *singleBoard;
+}
+

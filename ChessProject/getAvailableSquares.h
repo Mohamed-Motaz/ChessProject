@@ -13,12 +13,10 @@ using namespace sf;
 
 class getAvailableSquares
 {
-
-public:
+private:
 	getAvailableSquares();
 	chessPiece piece;
 	Board board;
-	getAvailableSquares(chessPiece piece, Board board);
 	bool isValid(ll x, ll y);
 	vector<pair<ll, ll>> getSquares();
 	vector<pair<ll, ll>> getBishopSquares();
@@ -27,5 +25,9 @@ public:
 	vector<pair<ll, ll>> getPawnSquares();
 	vector<pair<ll, ll>> getRookSquares();
 	vector<pair<ll, ll>> getKingSquares();
+
+public:
+	getAvailableSquares(chessPiece piece);
+	
 
 };

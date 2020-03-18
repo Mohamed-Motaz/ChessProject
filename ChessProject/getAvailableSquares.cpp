@@ -26,10 +26,10 @@ vector<pair<ll, ll>> getAvailableSquares::getSquares() {
 	if (piece.type == "Rook") answer = getKingSquares();
 	return answer;
 }
-getAvailableSquares::getAvailableSquares(chessPiece piece, Board board)
+getAvailableSquares::getAvailableSquares(chessPiece piece)
 {
 	this->piece = piece;
-	this->board = board;
+	this->board = Board::Instance();
 }
 bool getAvailableSquares::isValid(ll x, ll y) {
 	return x >= 1 && x <= 8 && y >= 1 && y <= 8;
