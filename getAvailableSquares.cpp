@@ -54,12 +54,91 @@ vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
 	//can move in any direction
 	vector<pair<ll, ll>> answer;
 
+	if (isValid(piece.getPos().first - 1, piece.getPos().second - 2)) {
+
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 2 });
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 2 });
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second + 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second + 1 });
+	}
+
 	return answer;
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move horizontally, vertically, and diagonaly
 	vector<pair<ll, ll>> answer;
+
+	int axis[] = { 1,-1 };
+
+
+	for (int i = 0; i < 2; i++) {
+
+		int xpos = piece.getPos().first + axis[i];
+
+		while (isValid(xpos, piece.getPos().second)) {
+
+			answer.push_back({ xpos , piece.getPos().second });
+
+			xpos += axis[i];
+
+		}
+
+		for (int j = 0; j < 2; j++) {
+
+			int ypos = piece.getPos().second + axis[j];
+
+			while (isValid(xpos, ypos)) {
+
+				answer.push_back({ xpos , ypos });
+
+				xpos += axis[i];
+
+				ypos += axis[j];
+
+			}
+
+		}
+
+		int ypos = piece.getPos().second + axis[i];
+
+		while (isValid(piece.getPos().first, ypos)) {
+
+			answer.push_back({ piece.getPos().first, ypos });
+
+			ypos += axis[i];
+
+
+		}
+
+
+	}
 
 	return answer;
 }
