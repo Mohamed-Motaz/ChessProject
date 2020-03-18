@@ -86,28 +86,38 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	return answer;
 }
 vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
-	int	Xrook1, Xrook2,int Yrook1,Yrook2; Xrook1 = piece.getPos().first+1;
-	Xrook2 = piece.getpos().first - 1;
-	Yrook1 = piece.getPos().second+1;
-	Yrook2 = piece.getPos().second - 1;
-	while (Xrook>0&&Xrook<9)  {
-		answer.push_back({ piece.getPos().first + 1, piece.getPos().second });
-		Xrook1;
-	}
-	while (Xrook < 9 && Xrook>0) {
-		answer.push_back({ piece.getPos().first - 1, piece.getPos().second });
-		Xrook2;
-	}
-	while (Yrook < 9 && Yrook>0) {
-		answer.push_back({ piece.getPos().first , piece.getPos().second + 1 });
-		Yrook1;
-	}
-		while (Yrook<9&& Yrook>0)) {
-		answer.push_back({ piece.getPos().first , piece.getPos().second-1 });
-		Yrook2;
-		}
-	}
+	//return a vector of all valid squares for the bishop
+	//can move vertically or horizontally
 	vector<pair<ll, ll>> answer;
+
+	int Xrook1 = piece.getPos().first + 1;
+	int Xrook2 = piece.getPos().first - 1;
+	int Yrook1 = piece.getPos().second + 1;
+	int Yrook2 = piece.getPos().second - 1;
+	while (isValid(Xrook1, piece.getPos().second)) {
+
+		answer.push_back({ Xrook1 , piece.getPos().second });
+		
+		Xrook1++;
+	}
+	while (isValid(Xrook2, piece.getPos().second)) {
+		answer.push_back({ Xrook2 , piece.getPos().second });
+		
+		Xrook2--;
+	}
+	while (isValid(piece.getPos().first,Yrook1)) {
+
+		answer.push_back({ piece.getPos().first,Yrook1 });
+		
+		Yrook1++;
+	}
+	while (isValid(piece.getPos().first, Yrook2)) {
+
+	    answer.push_back({ piece.getPos().first, Yrook2 });
+	
+	    Yrook2--;
+    }
+
 
 	return answer;
 }
