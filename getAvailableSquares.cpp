@@ -35,7 +35,10 @@ bool getAvailableSquares::isValid(ll x, ll y) {
 	return x >= 1 && x <= 8 && y >= 1 && y <= 8;
 }
 
-
+//for following functions, u must check if coordinates are valid
+//if path is blocked by a team member, u must stop before it
+//if path is blocked by an opposite team member, u must count is as possible and then stop
+//array to loop on is called board 
 
 vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	//return a vector of all valid squares for the bishop
@@ -51,92 +54,12 @@ vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
 	//can move in any direction
 	vector<pair<ll, ll>> answer;
 
-	if (isValid(piece.getPos().first - 1, piece.getPos().second - 2)) {
-
-		answer.push_back({piece.getPos().first - 1, piece.getPos().second - 2});
-	}
-	else if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
-
-		answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 2 });
-	}
-	else if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
-
-		answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 2 });
-	}
-	else if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
-
-		answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 2 });
-	}
-	else if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
-
-		answer.push_back({ piece.getPos().first + 2, piece.getPos().second - 1 });
-	}
-	else if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
-
-		answer.push_back({ piece.getPos().first - 2, piece.getPos().second + 1 });
-	}
-	else if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
-
-		answer.push_back({ piece.getPos().first - 2, piece.getPos().second - 1 });
-	}
-	else if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
-
-		answer.push_back({ piece.getPos().first + 2, piece.getPos().second + 1 });
-	}
-
 	return answer;
 }
-
 vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move horizontally, vertically, and diagonaly
 	vector<pair<ll, ll>> answer;
-
-	int axis[] = { 1,-1 };
-
-
-	for (int i = 0; i < 2; i++) {
-		
-		int xpos = piece.getPos().first + axis[i];
-
-		while (isValid(xpos, piece.getPos().second)) {
-
-			answer.push_back({ xpos , piece.getPos().second });
-
-			xpos += axis[i];
-
-		}
-
-		for (int j = 0; j < 2; j++) {
-
-			int ypos = piece.getPos().second + axis[j];
-
-			while (isValid(xpos, ypos)) {
-
-				answer.push_back({ xpos , ypos });
-
-				xpos += axis[i];
-
-				ypos += axis[j];
-
-			}
-
-		}
-
-		int ypos = piece.getPos().second + axis[i];
-
-		while (isValid(piece.getPos().first, ypos)) {
-
-			answer.push_back({ piece.getPos().first, ypos });
-
-			ypos += axis[i];
-
-
-		}
-
-
-	}
-
 
 	return answer;
 }
@@ -163,8 +86,27 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	return answer;
 }
 vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
-	//return a vector of all valid squares for the bishop
-	//can move vertically or horizontally
+	int	Xrook1, Xrook2,int Yrook1,Yrook2; Xrook1 = piece.getPos().first+1;
+	Xrook2 = piece.getpos().first - 1;
+	Yrook1 = piece.getPos().second+1;
+	Yrook2 = piece.getPos().second - 1;
+	while (Xrook>0&&Xrook<9)  {
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second });
+		Xrook1;
+	}
+	while (Xrook < 9 && Xrook>0) {
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second });
+		Xrook2;
+	}
+	while (Yrook < 9 && Yrook>0) {
+		answer.push_back({ piece.getPos().first , piece.getPos().second + 1 });
+		Yrook1;
+	}
+		while (Yrook<9&& Yrook>0)) {
+		answer.push_back({ piece.getPos().first , piece.getPos().second-1 });
+		Yrook2;
+		}
+	}
 	vector<pair<ll, ll>> answer;
 
 	return answer;
@@ -173,8 +115,6 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move one square only anywhere
 	vector<pair<ll, ll>> answer;
-
-
 
 	return answer;
 }
