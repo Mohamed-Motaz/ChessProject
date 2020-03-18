@@ -1,0 +1,180 @@
+#include "getAvailableSquares.h"
+#include "chessPiece.h"
+#include "Board.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sfml/Graphics.hpp>
+
+#define ll long long
+
+using namespace std;
+using namespace sf;
+
+getAvailableSquares::getAvailableSquares()
+{
+}
+
+vector<pair<ll, ll>> getAvailableSquares::getSquares() {
+	
+	vector<pair<ll, ll>> answer;
+	if (piece.type == "Bishop") answer = getBishopSquares();
+	if (piece.type == "Knight") answer = getKnightSquares();
+	if (piece.type == "King") answer = getQueenSquares();
+	if (piece.type == "Queen") answer = getPawnSquares();
+	if (piece.type == "Pawn") answer = getRookSquares();
+	if (piece.type == "Rook") answer = getKingSquares();
+	return answer;
+}
+getAvailableSquares::getAvailableSquares(chessPiece piece, Board board)
+{
+	this->piece = piece;
+	this->board = board;
+}
+bool getAvailableSquares::isValid(ll x, ll y) {
+	return x >= 1 && x <= 8 && y >= 1 && y <= 8;
+}
+
+
+
+vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
+	//return a vector of all valid squares for the bishop
+	//can move only diagonally
+	vector<pair<ll, ll>> answer;
+
+	return answer;
+
+}
+vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
+	//return a vector of all valid squares for the bishop
+	//moves in an L shape, 2 steps, then 1 step perpindicular to the first step
+	//can move in any direction
+	vector<pair<ll, ll>> answer;
+
+	if (isValid(piece.getPos().first - 1, piece.getPos().second - 2)) {
+
+		answer.push_back({piece.getPos().first - 1, piece.getPos().second - 2});
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 2 });
+	}
+	else if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
+
+		answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 2 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second + 1 });
+	}
+	else if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
+
+		answer.push_back({ piece.getPos().first - 2, piece.getPos().second - 1 });
+	}
+	else if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
+
+		answer.push_back({ piece.getPos().first + 2, piece.getPos().second + 1 });
+	}
+
+	return answer;
+}
+
+vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
+	//return a vector of all valid squares for the bishop
+	//can move horizontally, vertically, and diagonaly
+	vector<pair<ll, ll>> answer;
+
+	int axis[] = { 1,-1 };
+
+
+	for (int i = 0; i < 2; i++) {
+		
+		int xpos = piece.getPos().first + axis[i];
+
+		while (isValid(xpos, piece.getPos().second)) {
+
+			answer.push_back({ xpos , piece.getPos().second });
+
+			xpos += axis[i];
+
+		}
+
+		for (int j = 0; j < 2; j++) {
+
+			int ypos = piece.getPos().second + axis[j];
+
+			while (isValid(xpos, ypos)) {
+
+				answer.push_back({ xpos , ypos });
+
+				xpos += axis[i];
+
+				ypos += axis[j];
+
+			}
+
+		}
+
+		int ypos = piece.getPos().second + axis[i];
+
+		while (isValid(piece.getPos().first, ypos)) {
+
+			answer.push_back({ piece.getPos().first, ypos });
+
+			ypos += axis[i];
+
+
+		}
+
+
+	}
+
+
+	return answer;
+}
+vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
+	//return a vector of all valid squares for the bishop
+	//if first move for pawn, pawn can move two squares to the front
+	//decide if first move based on position on board. 
+	//if team black then position must b 7
+	//if team white then position must b 2
+	//can move only forward
+	vector<pair<ll, ll>> answer;
+	if (piece.team == "white") {
+		if (piece.getPos().first == 7) {
+			answer.push_back({ piece.getPos().first - 1, piece.getPos().second });
+			answer.push_back({ piece.getPos().first - 2, piece.getPos().second });
+		}
+	}
+	if (piece.team == "black") {
+		if (piece.getPos().first == 2) {
+			answer.push_back({ piece.getPos().first + 1, piece.getPos().second });
+			answer.push_back({ piece.getPos().first + 2, piece.getPos().second });
+		}
+	}
+	return answer;
+}
+vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
+	//return a vector of all valid squares for the bishop
+	//can move vertically or horizontally
+	vector<pair<ll, ll>> answer;
+
+	return answer;
+}
+vector<pair<ll, ll>> getAvailableSquares::getKingSquares() {
+	//return a vector of all valid squares for the bishop
+	//can move one square only anywhere
+	vector<pair<ll, ll>> answer;
+
+
+
+	return answer;
+}
