@@ -73,7 +73,7 @@ int main()
     //Black King
     chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
 
-   
+  
 
     while (window.isOpen()) {
         Event evnt;

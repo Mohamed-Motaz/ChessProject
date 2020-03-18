@@ -26,7 +26,7 @@ chessPiece::chessPiece()
 	
 pair<ll, ll> chessPiece::getPos()
 {
-	return pair<ll, ll>();
+	return position;
 }
 
 
