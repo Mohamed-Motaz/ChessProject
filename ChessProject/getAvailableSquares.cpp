@@ -215,10 +215,19 @@ vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 
 	return answer;
 }
-vector<pair<ll, ll>> getAvailableSquares::getKingSquares() {
+vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
+{
 	//return a vector of all valid squares for the bishop
 	//can move one square only anywhere
 	vector<pair<ll, ll>> answer;
-
+	int xaxis[] = { 1,1,1,-1,-1,-1,0,0 };
+	int yaxis[] = { 1,0,-1,-1,1,0,1,-1 };
+	for (int i = 0; i < 8; i++)
+	{
+		if (isValid(piece.getPos().first + xaxis[i], piece.getPos().second + yaxis[i]))
+		{
+			answer.push_back({ piece.getPos().first + xaxis[i],piece.getPos().second + yaxis[i] });
+		}
+	}
 	return answer;
 }
