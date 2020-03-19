@@ -159,6 +159,7 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 	return answer;
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	//return a vector of all valid squares for the bishop
 	//if first move for pawn, pawn can move two squares to the front
@@ -167,18 +168,37 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	//if team white then position must b 2
 	//can move only forward
 	vector<pair<ll, ll>> answer;
+	ll xPos = piece.getPos().first, yPos = piece.getPos().second;
 	if (piece.team == "white") {
-		if (piece.getPos().first == 7) {
-			answer.push_back({ piece.getPos().first - 1, piece.getPos().second });
-			answer.push_back({ piece.getPos().first - 2, piece.getPos().second });
+		if (piece.getPos().second == 7) {
+			
+			if (isValid(xPos, yPos - 1)) answer.push_back({ xPos, yPos - 1 });
+			if (isValid(xPos, yPos - 2)) answer.push_back({ xPos, yPos - 2 });
+			if (isValid(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 });
+			if (isValid(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 });
+		}
+		else {
+			
+			if (isValid(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 });
+			if (isValid(xPos, yPos - 1)) answer.push_back({ xPos, yPos - 1 });
+			if (isValid(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 });
 		}
 	}
 	if (piece.team == "black") {
-		if (piece.getPos().first == 2) {
-			answer.push_back({ piece.getPos().first + 1, piece.getPos().second });
-			answer.push_back({ piece.getPos().first + 2, piece.getPos().second });
+		if (piece.getPos().second == 2) {
+			if (isValid(xPos, yPos + 1)) answer.push_back({ xPos, yPos + 1 });
+			if (isValid(xPos, yPos + 2)) answer.push_back({ xPos, yPos + 2 });
+			if (isValid(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 });
+			if (isValid(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 });
+		}
+		else {
+			
+			if (isValid(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 });
+			if (isValid(xPos, yPos + 1)) answer.push_back({ xPos, yPos + 1 });
+			if (isValid(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 });
 		}
 	}
+
 	return answer;
 }
 vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
