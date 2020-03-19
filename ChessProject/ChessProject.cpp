@@ -89,10 +89,18 @@ int main()
             for (int j = 1; j <= 8; j++) {
                 if (board1.board[i][j].type.size() == 0) cout << "YAY";
                 cout << board1.board[i][j].type << " ";
-
+                //cout << typeid(board1.board).name() << endl;
+                //cout << typeid(board1.board[i][j]).name() << endl;
             }cout << endl;
         }
-       
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+               /* chessPiece piece = board1.board[i][j];
+                getAvailableSquares getAvailable;
+                getAvailable.piece = piece;
+                getAvailable.board1 = board1.board;*/
+            }
+        }
         //window.draw(shape);
         window.display();
         break;

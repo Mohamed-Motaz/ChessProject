@@ -31,6 +31,7 @@ getAvailableSquares::getAvailableSquares(chessPiece piece, Board board1)
 	this->piece = piece;
 	this->board1 = board1;
 }
+
 bool getAvailableSquares::isValid(ll x, ll y) {
 	return x >= 1 && x <= 8 && y >= 1 && y <= 8 && (board1.board[x][y].type.size() == 0 || board1.board[x][y].type != piece.type);
 }
