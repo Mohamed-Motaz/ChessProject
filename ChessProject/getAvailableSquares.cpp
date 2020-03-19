@@ -45,7 +45,7 @@ vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	//can move only diagonally
 	vector<pair<ll, ll>> answer;
 	
-		for (int i = 0; i < 6; i++) {
+		for (int i = 1; i < 7; i++) {
 			if (isvalid(piece.getPos().first + 1, piece.getPos().second + 1)) {
 				answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 1 });
 			}
