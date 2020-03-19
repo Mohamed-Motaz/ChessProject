@@ -95,10 +95,14 @@ int main()
         }
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-               /* chessPiece piece = board1.board[i][j];
-                getAvailableSquares getAvailable;
-                getAvailable.piece = piece;
-                getAvailable.board1 = board1.board;*/
+                getAvailableSquares getAvailable =  getAvailableSquares(board1.board[i][j], board1);
+                vector<pair<ll, ll>>  ans =  getAvailable.getSquares();
+                if (board1.board[i][j].type.size() == 0) continue;
+                cout << board1.board[i][j].type << endl;
+                cout << "Initial Position is: " << board1.board[i][j].getPos().first << " " << board1.board[i][j].getPos().second << endl;
+                for (auto elem : ans) {
+                    cout << elem.first << " " << elem.second << endl;
+                }
             }
         }
         //window.draw(shape);

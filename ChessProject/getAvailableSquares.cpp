@@ -33,7 +33,8 @@ getAvailableSquares::getAvailableSquares(chessPiece piece, Board board1)
 }
 
 bool getAvailableSquares::isValid(ll x, ll y) {
-	return x >= 1 && x <= 8 && y >= 1 && y <= 8 && (board1.board[x][y].type.size() == 0 || board1.board[x][y].type != piece.type);
+	
+	return x >= 1 && x <= 8 && y >= 1 && y <= 8 && (board1.board[x][y].type.size() == 0 || board1.board[x][y].team != piece.team);
 }
 
 //for following functions, u must check if coordinates are valid
@@ -46,17 +47,17 @@ vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	//can move only diagonally
 	vector<pair<ll, ll>> answer;
 	
-		for (int i = 0; i < 6; i++) {
-			if (isvalid(piece.getPos().first + 1, piece.getPos().second + 1)) {
+		for (int i = 1; i <= 6; i++) {
+			if (isValid(piece.getPos().first + 1, piece.getPos().second + 1)) {
 				answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 1 });
 			}
-			if (isvalid(piece.getPos().first + 1, piece.getPos().second - 1)) {
+			if (isValid(piece.getPos().first + 1, piece.getPos().second - 1)) {
 				answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 1 });
 			}
-			if (isvalid(piece.getPos().first - 1, piece.getPos().second + 1)) {
+			if (isValid(piece.getPos().first - 1, piece.getPos().second + 1)) {
 				answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 1 });
 			}
-			if (isvalid(piece.getPos().first - 1, piece.getPos().second - 1)) {
+			if (isValid(piece.getPos().first - 1, piece.getPos().second - 1)) {
 				answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 1 });
 			}
 
@@ -76,31 +77,31 @@ vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
 
 		answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 2 });
 	}
-	else if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
+	if (isValid(piece.getPos().first + 1, piece.getPos().second - 2)) {
 
 		answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 2 });
 	}
-	else if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
+	if (isValid(piece.getPos().first + 1, piece.getPos().second + 2)) {
 
 		answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 2 });
 	}
-	else if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
+	if (isValid(piece.getPos().first - 1, piece.getPos().second + 2)) {
 
 		answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 2 });
 	}
-	else if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
+	if (isValid(piece.getPos().first + 2, piece.getPos().second - 1)) {
 
 		answer.push_back({ piece.getPos().first + 2, piece.getPos().second - 1 });
 	}
-	else if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
+	if (isValid(piece.getPos().first - 2, piece.getPos().second + 1)) {
 
 		answer.push_back({ piece.getPos().first - 2, piece.getPos().second + 1 });
 	}
-	else if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
+	if (isValid(piece.getPos().first - 2, piece.getPos().second - 1)) {
 
 		answer.push_back({ piece.getPos().first - 2, piece.getPos().second - 1 });
 	}
-	else if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
+	if (isValid(piece.getPos().first + 2, piece.getPos().second + 1)) {
 
 		answer.push_back({ piece.getPos().first + 2, piece.getPos().second + 1 });
 	}
