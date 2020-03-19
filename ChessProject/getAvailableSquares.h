@@ -20,8 +20,6 @@ public:
 	Board board1;
 	getAvailableSquares(chessPiece piece, Board board1);
 	bool isValid(ll x, ll y);
-	bool isValidPawn(ll x, ll y);
-	bool isValidPawnSideWays(ll x, ll y);
 	vector<pair<ll, ll>> getSquares();
 	vector<pair<ll, ll>> getBishopSquares();
 	vector<pair<ll, ll>> getKnightSquares();
@@ -29,5 +27,6 @@ public:
 	vector<pair<ll, ll>> getPawnSquares();
 	vector<pair<ll, ll>> getRookSquares();
 	vector<pair<ll, ll>> getKingSquares();
-	
+	bool isValidPawnSideWays(ll x, ll y);
+	bool isValidPawn(ll x, ll y);
 };
