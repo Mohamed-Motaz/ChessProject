@@ -12,7 +12,7 @@ using namespace std;
 using namespace sf;
 
 
-chessPiece::chessPiece(string team, string type,pair<ll, ll> position, bool isAlive)
+chessPiece::chessPiece(string team, string type, pair<ll, ll> position, bool isAlive)
 {
 	this->team = team;
 	this->type = type;
@@ -23,13 +23,8 @@ chessPiece::chessPiece(string team, string type,pair<ll, ll> position, bool isAl
 chessPiece::chessPiece()
 {
 }
-	
+
 pair<ll, ll> chessPiece::getPos()
 {
 	return position;
 }
-
-
-
-	
-

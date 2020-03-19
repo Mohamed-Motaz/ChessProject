@@ -20,4 +20,3 @@ public:
 	chessPiece(string team, string type, pair<ll, ll> position, bool isAlive);
 	chessPiece();
 };
-

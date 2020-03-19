@@ -27,5 +27,5 @@ public:
 	vector<pair<ll, ll>> getPawnSquares();
 	vector<pair<ll, ll>> getRookSquares();
 	vector<pair<ll, ll>> getKingSquares();
-
+	bool isValidPawn(ll x, ll y);
 };

@@ -13,10 +13,10 @@ using namespace sf;
 
 int main()
 {
-    
+
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
-    
+
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
     chessPiece Pawn2W = chessPiece("White", "Pawn", { 7,2 }, true); board1.board[Pawn2W.getPos().first][Pawn2W.getPos().second] = Pawn2W;
@@ -73,17 +73,17 @@ int main()
     //Black King
     chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
 
-  
+
 
     while (window.isOpen()) {
         Event evnt;
         while (window.pollEvent(evnt)) {
             if (evnt.type == Event::Closed) {
-                
+
             }
 
         }
-        
+
         window.clear();
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
@@ -95,8 +95,8 @@ int main()
         }
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                getAvailableSquares getAvailable =  getAvailableSquares(board1.board[i][j], board1);
-                vector<pair<ll, ll>>  ans =  getAvailable.getSquares();
+                getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
+                vector<pair<ll, ll>>  ans = getAvailable.getSquares();
                 if (board1.board[i][j].type.size() == 0) continue;
                 cout << board1.board[i][j].type << endl;
                 cout << "Initial Position is: " << board1.board[i][j].getPos().first << " " << board1.board[i][j].getPos().second << endl;
@@ -109,5 +109,5 @@ int main()
         window.display();
         break;
     }
-    
+
 }

@@ -16,4 +16,3 @@ public:
 	chessPiece board[9][9];
 	Board();
 };
-
