@@ -44,6 +44,23 @@ vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move only diagonally
 	vector<pair<ll, ll>> answer;
+	
+		for (int i = 0; i < 6; i++) {
+			if (isvalid(piece.getPos().first + 1, piece.getPos().second + 1)) {
+				answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 1 });
+			}
+			if (isvalid(piece.getPos().first + 1, piece.getPos().second - 1)) {
+				answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 1 });
+			}
+			if (isvalid(piece.getPos().first - 1, piece.getPos().second + 1)) {
+				answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 1 });
+			}
+			if (isvalid(piece.getPos().first - 1, piece.getPos().second - 1)) {
+				answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 1 });
+			}
+
+		}
+
 
 	return answer;
 
