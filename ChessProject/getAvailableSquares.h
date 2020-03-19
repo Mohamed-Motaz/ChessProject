@@ -17,8 +17,8 @@ class getAvailableSquares
 public:
 	getAvailableSquares();
 	chessPiece piece;
-	Board board;
-	getAvailableSquares(chessPiece piece, Board board);
+	Board board1;
+	getAvailableSquares(chessPiece piece, Board board1);
 	bool isValid(ll x, ll y);
 	vector<pair<ll, ll>> getSquares();
 	vector<pair<ll, ll>> getBishopSquares();
