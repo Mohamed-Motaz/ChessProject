@@ -264,6 +264,9 @@ vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 			break;
 		Yrook2--;
 	}
+
+	return answer;
+
 vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 {
 	//return a vector of all valid squares for the bishop
