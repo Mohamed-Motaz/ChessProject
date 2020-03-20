@@ -239,33 +239,34 @@ vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 	while (isValid(Xrook1, piece.getPos().second)) {
 
 		answer.push_back({ Xrook1 , piece.getPos().second });
-		if (board1.board[Xrook1][piece.getPos().second].team != peice.team && board1.board[Xrook1][piece.getPos().second].team.size() != 0)
+		if (board1.board[Xrook1][piece.getPos().second].team != piece.team && board1.board[Xrook1][piece.getPos().second].team.size() != 0)
 			break;
 		Xrook1++;
 	}
 	while (isValid(Xrook2, piece.getPos().second)) {
 		answer.push_back({ Xrook2 , piece.getPos().second });
-		if (board1.board[Xrook2][piece.getPos().second].team != peice.team && board1.board[Xrook2][piece.getPos().second].team.size() != 0)
+		if (board1.board[Xrook2][piece.getPos().second].team != piece.team && board1.board[Xrook2][piece.getPos().second].team.size() != 0)
 			break;
 
-			Xrook2--;
+		Xrook2--;
 	}
 	while (isValid(piece.getPos().first, Yrook1)) {
 
 		answer.push_back({ piece.getPos().first,Yrook1 });
-		if (board1.board[piece.getPos().first][Yrook1].team != peice.team && board1.board[piece.getPos().first][Yrook1].team.size() != 0)
+		if (board1.board[piece.getPos().first][Yrook1].team != piece.team && board1.board[piece.getPos().first][Yrook1].team.size() != 0)
 			break;
 		Yrook1++;
 	}
 	while (isValid(piece.getPos().first, Yrook2)) {
 
 		answer.push_back({ piece.getPos().first, Yrook2 });
-		if (board1.board[piece.getPos().first][Yrook2].team != peice.team && board1.board[piece.getPos().first][Yrook2].team.size() != 0)
+		if (board1.board[piece.getPos().first][Yrook2].team != piece.team && board1.board[piece.getPos().first][Yrook2].team.size() != 0)
 			break;
 		Yrook2--;
 	}
 
 	return answer;
+}
 
 vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 {
@@ -281,5 +282,25 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 			answer.push_back({ piece.getPos().first + xaxis[i],piece.getPos().second + yaxis[i] });
 		}
 	}
+	vector<pair<ll, ll>> allAttackedSquares = kingCheckAllSquaresAttacked();
 	return answer;
+}
+
+vector<pair<ll, ll>> getAvailableSquares::kingCheckAllSquaresAttacked() {
+	vector<pair<ll, ll>> answers;
+
+	for (int i = 1; i <= 8; i++) {
+		for (int j = 1; j <= 8; j++) {
+			//check if peice is a different team and make sure it isnt empty
+			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0) {
+				getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
+				vector<pair<ll, ll>> ans = getAvailable.getSquares();
+				for (auto elem : ans) {
+					answers.push_back(elem);
+				}
+			}
+		}
+	}
+
+	return answers;
 }
