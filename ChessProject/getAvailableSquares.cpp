@@ -294,11 +294,11 @@ vector<pair<ll, ll>> getAvailableSquares::kingCheckAllSquaresAttacked() {
 		for (int j = 1; j <= 8; j++) {
 			//check if peice is a different team and make sure it isnt empty
 			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0) {
-				getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
-				vector<pair<ll, ll>> ans = getAvailable.getSquares();
-				for (auto elem : ans) {
+				//getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
+				//vector<pair<ll, ll>> ans = getAvailable.getSquares();
+				/*for (auto elem : ans) {
 					answers.push_back(elem);
-				}
+				}*/
 			}
 		}
 	}
