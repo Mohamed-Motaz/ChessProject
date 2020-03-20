@@ -26,6 +26,7 @@ vector<pair<ll, ll>> getAvailableSquares::getSquares() {
 	if (piece.type == "Rook") answer = getRookSquares();
 	return answer;
 }
+
 getAvailableSquares::getAvailableSquares(chessPiece piece, Board board1)
 {
 	this->piece = piece;
@@ -42,12 +43,9 @@ bool getAvailableSquares::isValidPawnSideWays(ll x, ll y) {
 	return  (board1.board[x][y].team != piece.team && board1.board[x][y].team.size() == 5);
 }
 
-
 bool getAvailableSquares::isValidPawn(ll x, ll y) {
 	return  (x >= 1 && x <= 8 && y >= 1 && y <= 8) && (board1.board[x][y].type.size() == 0);
 }
-
-
 
 //for following functions, u must check if coordinates are valid
 //if path is blocked by a team member, u must stop before it
@@ -79,6 +77,7 @@ vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	return answer;
 
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
 	//return a vector of all valid squares for the bishop
 	//moves in an L shape, 2 steps, then 1 step perpindicular to the first step
@@ -137,7 +136,7 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 			answer.push_back({ xpos , piece.getPos().second });
 
-			if (board1.board[xpos][piece.getPos().second].team != peice.team && board1.board[xpos][piece.getPos().second].team.size() != 0)
+			if (board1.board[xpos][piece.getPos().second].team != piece.team && board1.board[xpos][piece.getPos().second].team.size() != 0)
 
 				break;
 
@@ -153,7 +152,7 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 				answer.push_back({ xpos , ypos });
 
-				if (board1.board[xpos][ypos].team != peice.team && board1.board[xpos][ypos].team.size() != 0)
+				if (board1.board[xpos][ypos].team != piece.team && board1.board[xpos][ypos].team.size() != 0)
 
 					break;
 
@@ -171,7 +170,7 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 			answer.push_back({ piece.getPos().first, ypos });
 
-			if (board1.board[piece.getPos().first][ypos].team != peice.team && board1.board[piece.getPos().first][ypos].team.size() != 0)
+			if (board1.board[piece.getPos().first][ypos].team != piece.team && board1.board[piece.getPos().first][ypos].team.size() != 0)
 
 				break;
 
@@ -183,6 +182,7 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 	return answer;
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	//return a vector of all valid squares for the bishop
 	//if first move for pawn, pawn can move two squares to the front
@@ -227,6 +227,7 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 
 	return answer;
 }
+
 vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 	//return a vector of all valid squares for the bishop
 	//can move vertically or horizontally
