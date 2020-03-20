@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <sfml/Graphics.hpp>
+#include <SFML/Graphics.hpp>>
 
 #define ll long long
 
