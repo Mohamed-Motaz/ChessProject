@@ -239,30 +239,31 @@ vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {
 	while (isValid(Xrook1, piece.getPos().second)) {
 
 		answer.push_back({ Xrook1 , piece.getPos().second });
-
+		if (board1.board[Xrook1][piece.getPos().second].team != peice.team && board1.board[Xrook1][piece.getPos().second].team.size() != 0)
+			break;
 		Xrook1++;
 	}
 	while (isValid(Xrook2, piece.getPos().second)) {
 		answer.push_back({ Xrook2 , piece.getPos().second });
+		if (board1.board[Xrook2][piece.getPos().second].team != peice.team && board1.board[Xrook2][piece.getPos().second].team.size() != 0)
+			break;
 
-		Xrook2--;
+			Xrook2--;
 	}
 	while (isValid(piece.getPos().first, Yrook1)) {
 
 		answer.push_back({ piece.getPos().first,Yrook1 });
-
+		if (board1.board[piece.getPos().first][Yrook1].team != peice.team && board1.board[piece.getPos().first][Yrook1].team.size() != 0)
+			break;
 		Yrook1++;
 	}
 	while (isValid(piece.getPos().first, Yrook2)) {
 
 		answer.push_back({ piece.getPos().first, Yrook2 });
-
+		if (board1.board[piece.getPos().first][Yrook2].team != peice.team && board1.board[piece.getPos().first][Yrook2].team.size() != 0)
+			break;
 		Yrook2--;
 	}
-
-
-	return answer;
-}
 vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 {
 	//return a vector of all valid squares for the bishop
