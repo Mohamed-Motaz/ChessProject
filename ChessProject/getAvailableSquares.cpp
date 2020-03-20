@@ -137,6 +137,10 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 			answer.push_back({ xpos , piece.getPos().second });
 
+			if (board1.board[xpos][piece.getPos().second].team != peice.team && board1.board[xpos][piece.getPos().second].team.size() != 0)
+
+				break;
+
 			xpos += axis[i];
 
 		}
@@ -148,6 +152,10 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 			while (isValid(xpos, ypos)) {
 
 				answer.push_back({ xpos , ypos });
+
+				if (board1.board[xpos][ypos].team != peice.team && board1.board[xpos][ypos].team.size() != 0)
+
+					break;
 
 				xpos += axis[i];
 
@@ -162,6 +170,10 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 		while (isValid(piece.getPos().first, ypos)) {
 
 			answer.push_back({ piece.getPos().first, ypos });
+
+			if (board1.board[piece.getPos().first][ypos].team != peice.team && board1.board[piece.getPos().first][ypos].team.size() != 0)
+
+				break;
 
 			ypos += axis[i];
 		}
@@ -179,7 +191,6 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 	//if team white then position must b 2
 	//can move only forward
 	vector<pair<ll, ll>> answer;
-
 	ll yPos = piece.getPos().second, xPos = piece.getPos().first;
 	if (piece.team == "White") {
 		//cout << "WHITE ";
@@ -213,7 +224,7 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 			if (isValidPawnSideWays(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 });
 		}
 	}
-	//cout << endl;
+
 	return answer;
 }
 vector<pair<ll, ll>> getAvailableSquares::getRookSquares() {

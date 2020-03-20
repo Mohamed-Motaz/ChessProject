@@ -36,7 +36,6 @@ int main()
     chessPiece Pawn6B = chessPiece("Black", "Pawn", { 2,6 }, true); board1.board[Pawn6B.getPos().first][Pawn6B.getPos().second] = Pawn6B;
     chessPiece Pawn7B = chessPiece("Black", "Pawn", { 2,7 }, true); board1.board[Pawn7B.getPos().first][Pawn7B.getPos().second] = Pawn7B;
     chessPiece Pawn8B = chessPiece("Black", "Pawn", { 2,8 }, true); board1.board[Pawn8B.getPos().first][Pawn8B.getPos().second] = Pawn8B;
-    
 
     //White Rooks
     chessPiece Rook1W = chessPiece("White", "Rook", { 8,1 }, true); board1.board[Rook1W.getPos().first][Rook1W.getPos().second] = Rook1W;
@@ -90,8 +89,7 @@ int main()
             for (int j = 1; j <= 8; j++) {
                 if (board1.board[i][j].type.size() == 0) cout << "YAY";
                 cout << board1.board[i][j].type << " ";
-                //cout << typeid(board1.board).name() << endl;
-                //cout << typeid(board1.board[i][j]).name() << endl;
+
             }cout << endl;
         }
         for (int i = 1; i <= 8; i++) {
