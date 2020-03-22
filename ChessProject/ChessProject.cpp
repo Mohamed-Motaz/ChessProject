@@ -5,8 +5,8 @@
 #include "getAvailableSquares.h"
 
 //definitions
-#define MODE_WIDTH 1200
-#define MODE_HEIGHT 900
+#define MODE_WIDTH 1299
+#define MODE_HEIGHT 1000
 
 using namespace std;
 using namespace sf;
@@ -16,7 +16,11 @@ int main()
 
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
-
+    Texture BackGround; BackGround.loadFromFile("textures/4774.png");
+    Sprite back; back.setTexture(BackGround);
+    Texture Pieces; Pieces.loadFromFile("textures/pieces.png");
+    Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(100, 100, 100, 100)); piece.setPosition(100, 100);
+    CircleShape validmove(12); validmove.setFillColor(Color::Blue);
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
     chessPiece Pawn2W = chessPiece("White", "Pawn", { 7,2 }, true); board1.board[Pawn2W.getPos().first][Pawn2W.getPos().second] = Pawn2W;
@@ -71,20 +75,19 @@ int main()
     chessPiece King1W = chessPiece("White", "King", { 8,5 }, true); board1.board[King1W.getPos().first][King1W.getPos().second] = King1W;
 
     //Black King
-    chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
-
-
+    chessPiece King1B = chessPiece("Black", "King2", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
 
     while (window.isOpen()) {
         Event evnt;
         while (window.pollEvent(evnt)) {
             if (evnt.type == Event::Closed) {
-
+                window.close();
             }
 
         }
-
         window.clear();
+        //Kareem : I've commented that to work on the sfml
+        /*
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 if (board1.board[i][j].type.size() == 0) cout << "YAY";
@@ -104,9 +107,45 @@ int main()
                 }
             }
         }
-        //window.draw(shape);
-        window.display();
-        break;
-    }
+        */
 
+        window.draw(back);
+        // Kareem : drawing the pieces according their board positions
+        for (int i = 1; i < 9; i++) {
+            for (int j = 1; j < 9; j++) {
+                if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
+                {
+                    piece.setTextureRect(IntRect(100, 100, 100, 100));
+                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+                if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "Black")
+                {
+                    piece.setTextureRect(IntRect(0, 200, 100, 100));
+                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+
+            }
+
+        }
+
+
+        window.draw(piece);
+        window.display();
+    }
 }
+
+/*
+
+
+      getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
+          vector<pair<ll, ll>>  ans = getAvailable.getSquares();
+          for (auto elem : ans)
+          {
+             validmove.setPosition(100 * elem.second + 38, 100 * elem.first + 38);
+             window.draw(validmove);
+          }
+
+
+*/
