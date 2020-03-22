@@ -23,13 +23,8 @@ bool Gameplay::IsValidPositionChange(pair<ll, ll> startingPosition, pair<ll, ll>
 		if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
 
 			return true;
-
-			
 		}
-
 	}
-
-
 	return false;
 }
 
