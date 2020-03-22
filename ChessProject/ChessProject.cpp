@@ -136,6 +136,19 @@ int main()
                     piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
+                if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "White")
+                {
+                    piece.setTextureRect(IntRect(300, 0, 100, 100));
+                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+
+                }
+                if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "Black")
+                {
+                    piece.setTextureRect(IntRect(300, 300, 100, 100));
+                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
 
             }
 
@@ -146,17 +159,31 @@ int main()
         window.display();
     }
 }
-
 /*
 
 
-      getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
-          vector<pair<ll, ll>>  ans = getAvailable.getSquares();
-          for (auto elem : ans)
-          {
-             validmove.setPosition(100 * elem.second + 38, 100 * elem.first + 38);
-             window.draw(validmove);
-          }
+
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            Vector2i mousepos = Mouse::getPosition(window);
+            for (int i = 1; i < 9; i++) {
+                for (int j = 1; j < 9; j++) {
+                    if( mousepos.x > 100 * board1.board[i][j].getPos().second+10 && mousepos.x < 100 * board1.board[i][j].getPos().second +80
+                       && mousepos.y > 100 * board1.board[i][j].getPos().second + 10 && mousepos.y < 100 * board1.board[i][j].getPos().second + 80)
+                    {
+                        getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
+                        vector<pair<ll, ll>>  ans = getAvailable.getSquares();
+                        for (auto elem : ans)
+                        {
+                            validmove.setPosition(100 * elem.second + 38, 100 * elem.first + 38);
+                           window.draw(validmove);
+                        }
+
+                    }
+
+                }
+            }
+        }
+
 
 
 */
