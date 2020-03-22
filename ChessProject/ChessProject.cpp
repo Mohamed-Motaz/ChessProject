@@ -1,10 +1,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Board.h"
 #include "chessPiece.h"
 #include "getAvailableSquares.h"
 #include "Gameplay.h"
-
 
 //definitions
 #define MODE_WIDTH 1299
@@ -15,6 +15,7 @@ using namespace sf;
 
 int main()
 {
+    vector<pair<double, double>>Clik;
 
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
@@ -22,7 +23,7 @@ int main()
     Sprite back; back.setTexture(BackGround);
     Texture Pieces; Pieces.loadFromFile("textures/pieces.png");
     Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(100, 100, 100, 100)); piece.setPosition(100, 100);
-    CircleShape validmove(12); validmove.setFillColor(Color::Blue);
+    CircleShape validmove(12); validmove.setFillColor(Color::Blue); validmove.setPosition(2000, 2000);
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
     chessPiece Pawn2W = chessPiece("White", "Pawn", { 7,2 }, true); board1.board[Pawn2W.getPos().first][Pawn2W.getPos().second] = Pawn2W;
@@ -89,7 +90,7 @@ int main()
         }
         window.clear();
         //Kareem : I've commented that to work on the sfml
-        
+        /*
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 if (board1.board[i][j].type.size() == 0) cout << "YAY";
@@ -97,7 +98,7 @@ int main()
 
             }cout << endl;
         }
-        /*for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                 vector<pair<ll, ll>>  ans = getAvailable.getSquares();
@@ -109,10 +110,10 @@ int main()
                 }
             }
         }
-        */
 
-        
-        pair<pair<ll, ll>, pair<ll,ll>> positons;
+
+
+        pair<pair<ll, ll>, pair<ll, ll>> positons;
         positons = Gameplay::InputStartingPositionAndTargetPosition();
         pair<ll, ll> startingPosition = positons.first, targetPosition = positons.second;
         if (Gameplay::IsValidPositionChange(startingPosition, targetPosition, board1)) {
@@ -121,6 +122,7 @@ int main()
         else {
             cout << "INVALID MOVE" << endl;
         }
+        */
         window.draw(back);
         // Kareem : drawing the pieces according their board positions
         for (int i = 1; i < 9; i++) {
@@ -180,38 +182,40 @@ int main()
             }
 
         }
-		
-		
-
-	
-        window.draw(piece);
-        window.display();
-    }
-}
-/*
-
-
 
         if (Mouse::isButtonPressed(Mouse::Left)) {
+            Clik.clear();
             Vector2i mousepos = Mouse::getPosition(window);
             for (int i = 1; i < 9; i++) {
                 for (int j = 1; j < 9; j++) {
-                    if( mousepos.x > 100 * board1.board[i][j].getPos().second+10 && mousepos.x < 100 * board1.board[i][j].getPos().second +80
-                       && mousepos.y > 100 * board1.board[i][j].getPos().second + 10 && mousepos.y < 100 * board1.board[i][j].getPos().second + 80)
+                    if (mousepos.x > 100 * board1.board[i][j].getPos().second && mousepos.x < 100 * board1.board[i][j].getPos().second + 100 &&
+                        mousepos.y > 100 * board1.board[i][j].getPos().first && mousepos.y < 100 * board1.board[i][j].getPos().first + 100)
                     {
                         getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                         vector<pair<ll, ll>>  ans = getAvailable.getSquares();
                         for (auto elem : ans)
                         {
+                            Clik.push_back({ 100 * elem.second + 38, 100 * elem.first + 38 });
                             validmove.setPosition(100 * elem.second + 38, 100 * elem.first + 38);
-                           window.draw(validmove);
+                            window.draw(validmove);
                         }
-
                     }
 
                 }
             }
         }
+        if (!Mouse::isButtonPressed(Mouse::Left)) {
+            for (int i = 0; i < Clik.size(); i++) {
+                validmove.setPosition(Clik[i].first, Clik[i].second);
+                window.draw(validmove);
+            }
+        }
+
+        window.draw(piece);
+        window.display();
+    }
+}
+/*
 
 
 
