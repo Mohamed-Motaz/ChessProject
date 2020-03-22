@@ -18,9 +18,9 @@ private:
 	Gameplay();
 public:
 	
-	static bool IsValidPositionChange(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition);
+	static bool IsValidPositionChange(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board);
 
 	static pair<pair<ll, ll>, pair<ll, ll>> InputStartingPositionAndTargetPosition();
 	
-
+	static void MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1);
 };
