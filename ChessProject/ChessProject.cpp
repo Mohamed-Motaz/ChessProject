@@ -141,6 +141,44 @@ int main()
             }
 
         }
+		for (int i = 1; i < 9; i++) {
+			for (int j = 1; j < 9; j++) {
+				if (board1.board[i][j].type == "King" && board1.board[i][j].team == "White")
+				{
+					piece.setTextureRect(IntRect(400, 0, 100, 100));
+					piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+					window.draw(piece);
+				}
+				if (board1.board[i][j].type == "King" && board1.board[i][j].team == "Black")
+				{
+					piece.setTextureRect(IntRect(400, 300, 100, 100));
+					piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+					window.draw(piece);
+				}
+
+			}
+
+		}
+
+
+		for (int i = 1; i < 9; i++) {
+			for (int j = 1; j < 9; j++) {
+				if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "White")
+				{
+					piece.setTextureRect(IntRect(100, 0, 100, 100));
+					piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+					window.draw(piece);
+				}
+				if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "Black")
+				{
+					piece.setTextureRect(IntRect(100, 300, 100, 100));
+					piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+					window.draw(piece);
+				}
+
+			}
+
+		}
 
 
         window.draw(piece);
