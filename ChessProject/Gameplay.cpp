@@ -46,6 +46,7 @@ pair<pair<ll, ll>, pair<ll, ll>> Gameplay::InputStartingPositionAndTargetPositio
 void Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1)
 {
 	chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
+	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
 	board1.board[targetPosition.first][targetPosition.second] = currentPiece;
 
 }
