@@ -76,7 +76,7 @@ int main()
     chessPiece King1W = chessPiece("White", "King", { 8,5 }, true); board1.board[King1W.getPos().first][King1W.getPos().second] = King1W;
 
     //Black King
-    chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
+    chessPiece King1B = chessPiece("Black", "King2", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
 
     while (window.isOpen()) {
         Event evnt;
@@ -88,7 +88,7 @@ int main()
         }
         window.clear();
         //Kareem : I've commented that to work on the sfml
-        /*
+        
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 if (board1.board[i][j].type.size() == 0) cout << "YAY";
@@ -96,7 +96,7 @@ int main()
 
             }cout << endl;
         }
-        for (int i = 1; i <= 8; i++) {
+        /*for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                 vector<pair<ll, ll>>  ans = getAvailable.getSquares();
@@ -115,7 +115,7 @@ int main()
         positons = Gameplay::InputStartingPositionAndTargetPosition();
         pair<ll, ll> startingPosition = positons.first, targetPosition = positons.second;
         if (Gameplay::IsValidPositionChange(startingPosition, targetPosition, board1)) {
-            Gameplay::MovePiece(startingPosition, targetPosition, board1);
+            board1 = Gameplay::MovePiece(startingPosition, targetPosition, board1);
         }
         else {
             cout << "INVALID MOVE" << endl;
