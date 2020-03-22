@@ -162,11 +162,13 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="chessPiece.cpp" />
     <ClCompile Include="ChessProject.cpp" />
+    <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="getAvailableSquares.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="chessPiece.h" />
+    <ClInclude Include="Gameplay.h" />
     <ClInclude Include="getAvailableSquares.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
