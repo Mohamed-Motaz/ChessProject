@@ -79,7 +79,6 @@ int main()
         Event evnt;
         while (window.pollEvent(evnt)) {
             if (evnt.type == Event::Closed) {
-
             }
 
         }
