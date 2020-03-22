@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "chessPiece.h"
 #include "getAvailableSquares.h"
+#include "Gameplay.h"
 
 //definitions
 #define MODE_WIDTH 1299
@@ -109,6 +110,16 @@ int main()
         }
         */
 
+        
+        pair<pair<ll, ll>, pair<ll,ll>> positons;
+        positons = Gameplay::InputStartingPositionAndTargetPosition();
+        pair<ll, ll> startingPosition = positons.first, targetPosition = positons.second;
+        if (Gameplay::IsValidPositionChange(startingPosition, targetPosition, board1)) {
+            Gameplay::MovePiece(startingPosition, targetPosition, board1);
+        }
+        else {
+            cout << "INVALID MOVE";
+        }
         window.draw(back);
         // Kareem : drawing the pieces according their board positions
         for (int i = 1; i < 9; i++) {
