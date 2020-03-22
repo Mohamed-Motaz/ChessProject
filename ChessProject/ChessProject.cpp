@@ -5,6 +5,7 @@
 #include "getAvailableSquares.h"
 #include "Gameplay.h"
 
+
 //definitions
 #define MODE_WIDTH 1299
 #define MODE_HEIGHT 1000
