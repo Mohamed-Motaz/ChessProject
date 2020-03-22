@@ -13,15 +13,15 @@ Gameplay::Gameplay() {
 
 bool Gameplay::IsValidPositionChange(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1)
 {
-
+	if (board1.board[targetPosition.first][targetPosition.second].type.size() == 0) cout << "EMPTY SPACE" << endl;
 	getAvailableSquares  getAvailable = getAvailableSquares(board1.board[startingPosition.first][startingPosition.second], board1);
 
 	vector<pair<ll, ll>>  ans = getAvailable.getSquares();
-
+	
 	for (auto elem : ans) {
-
+		cout << elem.first << " " << elem.second << endl;
 		if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
-
+			
 			return true;
 		}
 	}
@@ -48,5 +48,7 @@ void Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosit
 	chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
 	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
 	board1.board[targetPosition.first][targetPosition.second] = currentPiece;
+	currentPiece.position = { targetPosition.first, targetPosition.second };
+	
 
 }

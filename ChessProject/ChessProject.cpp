@@ -118,7 +118,7 @@ int main()
             Gameplay::MovePiece(startingPosition, targetPosition, board1);
         }
         else {
-            cout << "INVALID MOVE";
+            cout << "INVALID MOVE" << endl;
         }
         window.draw(back);
         // Kareem : drawing the pieces according their board positions

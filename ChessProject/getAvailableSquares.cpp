@@ -40,7 +40,7 @@ bool getAvailableSquares::isValid(ll x, ll y) {
 
 bool getAvailableSquares::isValidPawnSideWays(ll x, ll y) {
 
-	return  (board1.board[x][y].team != piece.team && board1.board[x][y].team.size() == 5);
+	return  (board1.board[x][y].team != piece.team && board1.board[x][y].team.size() != 0);
 }
 
 bool getAvailableSquares::isValidPawn(ll x, ll y) {
