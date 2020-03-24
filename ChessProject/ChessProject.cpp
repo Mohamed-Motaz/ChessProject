@@ -19,11 +19,11 @@ int main()
 
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
-    Texture BackGround; BackGround.loadFromFile("textures/11.png");
+    Texture BackGround; BackGround.loadFromFile("textures/Chess Board.png");
     Sprite back; back.setTexture(BackGround);
-    Texture Pieces; Pieces.loadFromFile("textures/22.png");
-    Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(120, 60);
-    CircleShape validmove(12); validmove.setFillColor(Color::Blue); validmove.setPosition(2000, 2000);
+    Texture Pieces; Pieces.loadFromFile("textures/Pieces.png");
+    Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(60, 60);
+    CircleShape validmove(6); validmove.setFillColor(Color::Blue); validmove.setPosition(1000, 1000);
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
     chessPiece Pawn2W = chessPiece("White", "Pawn", { 7,2 }, true); board1.board[Pawn2W.getPos().first][Pawn2W.getPos().second] = Pawn2W;
@@ -118,7 +118,7 @@ int main()
         else {
             cout << "INVALID MOVE" << endl;
         }*/
-        
+
         window.draw(back);
         // Kareem : drawing the pieces according their board positions
         for (int i = 1; i < 9; i++) {
@@ -131,37 +131,35 @@ int main()
                 }
                 if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(0, 200, 60, 60));
+                    piece.setTextureRect(IntRect(0, 120, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(300, 0, 60, 60));
+                    piece.setTextureRect(IntRect(180, 0, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
 
                 }
                 if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(300, 300, 60, 60));
+                    piece.setTextureRect(IntRect(180, 180, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "King" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(400, 0, 60, 60));
+                    piece.setTextureRect(IntRect(240, 0, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "King" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(400, 300, 60, 60));
+                    piece.setTextureRect(IntRect(240, 180, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
-
-
                 if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "White")
                 {
                     piece.setTextureRect(IntRect(60, 0, 60, 60));
@@ -170,10 +168,35 @@ int main()
                 }
                 if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(60, 300, 60, 60));
+                    piece.setTextureRect(IntRect(60, 180, 60, 60));
                     piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
+                if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "White")
+                {
+                    piece.setTextureRect(IntRect(120, 0, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+                if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "Black")
+                {
+                    piece.setTextureRect(IntRect(120, 180, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+                if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "White")
+                {
+                    piece.setTextureRect(IntRect(0, 0, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+                if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "Black")
+                {
+                    piece.setTextureRect(IntRect(0, 180, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                    window.draw(piece);
+                }
+
 
             }
 
@@ -191,8 +214,8 @@ int main()
                         vector<pair<ll, ll>>  ans = getAvailable.getSquares();
                         for (auto elem : ans)
                         {
-                            Clik.push_back({ 60 * elem.second + 38, 60 * elem.first + 38 });
-                            validmove.setPosition(60 * elem.second + 38, 60 * elem.first + 38);
+                            Clik.push_back({ 60 * elem.second + 25, 60 * elem.first + 25 });
+                            validmove.setPosition(60 * elem.second + 25, 60 * elem.first + 25);
                             window.draw(validmove);
                         }
                     }
