@@ -215,32 +215,44 @@ vector<pair<ll, ll>> getAvailableSquares::getPawnSquares() {
 		//cout << "WHITE ";
 		if (piece.getPos().first == 7) {
 			//cout << "IN FIRST IF ";
-			if (isValidPawn(xPos - 1, yPos)) answer.push_back({ xPos - 1, yPos });
-			if (isValidPawn(xPos - 2, yPos)) answer.push_back({ xPos - 2, yPos });
-			if (isValidPawnSideWays(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 });
-			if (isValidPawnSideWays(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 });
+			while (true) {
+				if (isValidPawn(xPos - 1, yPos)) answer.push_back({ xPos - 1, yPos }); else break;
+				if (isValidPawn(xPos - 2, yPos)) answer.push_back({ xPos - 2, yPos }); else break;
+				if (isValidPawnSideWays(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 }); else break;
+				if (isValidPawnSideWays(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 }); else break;
+				break;
+			}
 		}
 		else {
 			//cout << "IN SECOND ELSE";
-			if (isValidPawnSideWays(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 });
-			if (isValidPawn(xPos - 1, yPos)) answer.push_back({ xPos - 1, yPos });
-			if (isValidPawnSideWays(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 });
+			while (true) {
+				if (isValidPawnSideWays(xPos - 1, yPos - 1)) answer.push_back({ xPos - 1, yPos - 1 }); else break;
+				if (isValidPawn(xPos - 1, yPos)) answer.push_back({ xPos - 1, yPos }); else break;
+				if (isValidPawnSideWays(xPos - 1, yPos + 1)) answer.push_back({ xPos - 1, yPos + 1 }); else break;
+				break;
+			}
 		}
 	}
 	if (piece.team == "Black") {
 		//cout << "BLACK ";
 		if (piece.getPos().first == 2) {
 			//cout << "IN THIRD IF ";
-			if (isValidPawn(xPos + 1, yPos)) answer.push_back({ xPos + 1, yPos });
-			if (isValidPawn(xPos + 2, yPos)) answer.push_back({ xPos + 2, yPos });
-			if (isValidPawnSideWays(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 });
-			if (isValidPawnSideWays(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 });
+			while (true) {
+				if (isValidPawn(xPos + 1, yPos)) answer.push_back({ xPos + 1, yPos }); else break;
+				if (isValidPawn(xPos + 2, yPos)) answer.push_back({ xPos + 2, yPos }); else break;
+				if (isValidPawnSideWays(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 }); else break;
+				if (isValidPawnSideWays(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 }); else break;
+				break;
+			}
 		}
 		else {
 			//cout << "IN FOURTH ELSE";
-			if (isValidPawnSideWays(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 });
-			if (isValidPawn(xPos + 1, yPos)) answer.push_back({ xPos + 1, yPos });
-			if (isValidPawnSideWays(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 });
+			while (true) {
+				if (isValidPawnSideWays(xPos + 1, yPos + 1)) answer.push_back({ xPos + 1, yPos + 1 }); else break;
+				if (isValidPawn(xPos + 1, yPos)) answer.push_back({ xPos + 1, yPos }); else break;
+				if (isValidPawnSideWays(xPos + 1, yPos - 1)) answer.push_back({ xPos + 1, yPos - 1 }); else break;
+				break;
+			}
 		}
 	}
 

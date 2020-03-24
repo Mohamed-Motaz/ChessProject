@@ -137,74 +137,74 @@ int main()
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 60, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(0, 120, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(180, 0, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
 
                     }
                     if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(180, 180, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "King" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(240, 0, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "King" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(240, 180, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 0, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(60, 180, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(120, 0, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(120, 180, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(0, 0, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(0, 180, 60, 60));
-                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
+                        piece.setPosition(60 * j, 60 * i);
                         window.draw(piece);
                     }
 
@@ -251,7 +251,7 @@ int main()
                 {
                     if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
                     {
-                        valid_clickpos.first = elem.second; valid_clickpos.second = elem.first;
+                        valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
                         board1 = Gameplay::MovePiece({XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
                         cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
                         for (int x = 1; x <= 8; x++) {

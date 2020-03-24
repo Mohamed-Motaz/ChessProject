@@ -73,6 +73,8 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 			}
 		}
 	}
+	cout << "starting position for piece " << currentPiece.team << " " << currentPiece.type << " is " << startingPosition.first << " " << startingPosition.second << endl;
+	cout << "target position is " << targetPosition.first << " " << targetPosition.second << endl;
 	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
 	board1.board[targetPosition.first][targetPosition.second].isAlive = currentPiece.isAlive;
 	board1.board[targetPosition.first][targetPosition.second].team = currentPiece.team;
