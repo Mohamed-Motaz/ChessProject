@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <SFML/Graphics.hpp>>
+#include <sfml/Graphics.hpp>
 
 #define ll long long
 
@@ -57,25 +57,38 @@ vector<pair<ll, ll>> getAvailableSquares::getBishopSquares() {
 	//can move only diagonally
 	vector<pair<ll, ll>> answer;
 
-	for (int i = 1; i <= 6; i++) {
-		if (isValid(piece.getPos().first +1, piece.getPos().second + 1)) {
-			answer.push_back({ piece.getPos().first + 1, piece.getPos().second + 1 });
-		}
-		if (isValid(piece.getPos().first + 1, piece.getPos().second - 1)) {
-			answer.push_back({ piece.getPos().first + 1, piece.getPos().second - 1 });
-		}
-		if (isValid(piece.getPos().first - 1, piece.getPos().second + 1)) {
-			answer.push_back({ piece.getPos().first - 1, piece.getPos().second + 1 });
-		}
-		if (isValid(piece.getPos().first - 1, piece.getPos().second - 1)) {
-			answer.push_back({ piece.getPos().first - 1, piece.getPos().second - 1 });
+	int axis[] = { 1,-1 };
+
+	for (int i = 0; i < 2; i++) {
+
+		int xpos = piece.getPos().first + axis[i];
+
+		for (int j = 0; j < 2; j++) {
+
+			xpos = piece.getPos().first + axis[i];
+
+			int ypos = piece.getPos().second + axis[j];
+
+			while (isValid(xpos, ypos)) {
+
+				answer.push_back({ xpos , ypos });
+
+				if (board1.board[xpos][ypos].team != piece.team && board1.board[xpos][ypos].team.size() != 0)
+
+					break;
+
+				xpos += axis[i];
+
+				ypos += axis[j];
+
+			}
+
 		}
 
 	}
+		return answer;
 
-
-	return answer;
-
+	
 }
 
 vector<pair<ll, ll>> getAvailableSquares::getKnightSquares() {
@@ -144,7 +157,11 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 
 		}
 
+		
+
 		for (int j = 0; j < 2; j++) {
+
+			xpos = piece.getPos().first + axis[i];
 
 			int ypos = piece.getPos().second + axis[j];
 
@@ -163,6 +180,8 @@ vector<pair<ll, ll>> getAvailableSquares::getQueenSquares() {
 			}
 
 		}
+
+		  
 
 		int ypos = piece.getPos().second + axis[i];
 
