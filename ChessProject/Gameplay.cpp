@@ -86,11 +86,12 @@ bool Gameplay::isKingCheckmated(pair<ll, ll> currentPosition, Board board1)
 	//Case 1: King is attacked
 	//		  No available squares
 	//		  No piece can block the attack
-
+	
 	//Case 2: King moves to attacked position
 	//implemented in MovePiece method
 
 	//Case 3: Only king can attack piece BUT piece is defended
+	//already taken care of
 	return false;
 }
 
