@@ -40,7 +40,7 @@ pair<pair<ll, ll>, pair<ll, ll>> Gameplay::InputStartingPositionAndTargetPositio
 
 	cin >> TargetPosition.first >> TargetPosition.second;
 
-	return{ StartingPosition, TargetPosition };
+	return { StartingPosition, TargetPosition };
 }
 
 Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1)
@@ -50,14 +50,20 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 	//Case 2 of checkmate: Move to attacked position
 	if (currentPiece.type == "King") {
 		string kingTeam = currentPiece.team;
+		
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
 				chessPiece tmp = board1.board[i][j];
-				getAvailableSquares getAvailable(tmp, board1);
-				vector<pair<ll, ll>> positions = getAvailable.getSquares();
-				for (auto elem : positions) {
-					if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
-						//checkmate
+				if (tmp.type.size() != 0 && tmp.team != kingTeam) {
+					getAvailableSquares getAvailable(tmp, board1);
+					vector<pair<ll, ll>> positions = getAvailable.getSquares();
+					for (auto elem : positions) {
+
+						if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
+							
+							//checkmate
+							return NULL;
+						}
 					}
 				}
 			}
