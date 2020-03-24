@@ -23,4 +23,6 @@ public:
 	static pair<pair<ll, ll>, pair<ll, ll>> InputStartingPositionAndTargetPosition();
 	
 	static Board MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1);
+
+	static bool isKingCheckmated(pair<ll, ll> currentPosition, Board board1);
 };
