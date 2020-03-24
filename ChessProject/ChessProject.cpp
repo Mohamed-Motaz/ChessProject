@@ -133,6 +133,7 @@ int main()
             // Kareem : drawing the pieces according their board positions
             for (int i = 1; i < 9; i++) {
                 for (int j = 1; j < 9; j++) {
+                    if (board1.board[i][j].type.size() == 0) continue;
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 60, 60, 60));
@@ -242,19 +243,32 @@ int main()
             }
             if (Mouse::isButtonPressed(Mouse::Left))
             {
+                cout << "yayayaya" << endl;
                 getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
                 vector<pair<ll, ll>>  ans = getAvailable.getSquares();
+                cout << ans.size() << endl;
                 for (auto elem : ans)
                 {
                     if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
                     {
                         valid_clickpos.first = elem.second; valid_clickpos.second = elem.first;
+                        board1 = Gameplay::MovePiece({XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
+                        cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
+                        for (int x = 1; x <= 8; x++) {
+                            for (int z = 1; z <= 8; z++) {
+                                if (board1.board[x][z].team.size() == 0) {
+                                    cout << "yay "; continue;
+                                }
+                                cout << board1.board[x][z].type << ' ';
+                            }cout << endl;
+                            
+                        }
                     }
                 }
             }
-            if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
+            //if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
 
-
+            
             window.draw(piece);
             window.display();
         }

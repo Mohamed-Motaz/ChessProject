@@ -74,7 +74,10 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 		}
 	}
 	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
-	board1.board[targetPosition.first][targetPosition.second] = currentPiece;
+	board1.board[targetPosition.first][targetPosition.second].isAlive = currentPiece.isAlive;
+	board1.board[targetPosition.first][targetPosition.second].team = currentPiece.team;
+	board1.board[targetPosition.first][targetPosition.second].type = currentPiece.type;
+	
 	currentPiece.position = { targetPosition.first, targetPosition.second };
 
 	return board1;
