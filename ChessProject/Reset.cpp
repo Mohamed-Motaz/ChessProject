@@ -15,8 +15,10 @@ using namespace sf;
 Reset rees;
 void Reset::restart()
 {
+
     vector<pair<double, double>>Clik;
     pair<double, double>XY_clickpos;
+    pair<double, double>valid_clickpos;
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
     Texture BackGround; BackGround.loadFromFile("textures/Chess Board.png");
@@ -81,6 +83,7 @@ void Reset::restart()
     chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
     while (true) {
         while (window.isOpen()) {
+            //Kareem : game restart
             if (Keyboard::isKeyPressed(Keyboard::Tab)) { window.close(); rees.restart(); }
 
             Event evnt;
@@ -126,6 +129,7 @@ void Reset::restart()
             // Kareem : drawing the pieces according their board positions
             for (int i = 1; i < 9; i++) {
                 for (int j = 1; j < 9; j++) {
+                    if (board1.board[i][j].type.size() == 0) continue;
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 60, 60, 60));
@@ -205,9 +209,9 @@ void Reset::restart()
 
             }
 
+            Vector2i mousepos = Mouse::getPosition(window);
             if (Mouse::isButtonPressed(Mouse::Left)) {
                 Clik.clear();
-                Vector2i mousepos = Mouse::getPosition(window);
                 for (int i = 1; i < 9; i++) {
                     for (int j = 1; j < 9; j++) {
                         if (mousepos.x > 60 * board1.board[i][j].getPos().second && mousepos.x < 60 * board1.board[i][j].getPos().second + 60 &&
@@ -223,9 +227,9 @@ void Reset::restart()
                                 window.draw(validmove);
                             }
                         }
-
                     }
                 }
+
             }
             if (!Mouse::isButtonPressed(Mouse::Left)) {
                 for (int i = 0; i < Clik.size(); i++) {
@@ -233,6 +237,33 @@ void Reset::restart()
                     window.draw(validmove);
                 }
             }
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+                cout << "yayayaya" << endl;
+                getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
+                vector<pair<ll, ll>>  ans = getAvailable.getSquares();
+                cout << ans.size() << endl;
+                for (auto elem : ans)
+                {
+                    if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
+                    {
+                        valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
+                        board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
+                        cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
+                        for (int x = 1; x <= 8; x++) {
+                            for (int z = 1; z <= 8; z++) {
+                                /*if (board1.board[x][z].team.size() == 0) {
+                                    cout << "yay "; continue;
+                                }*/
+                                cout << board1.board[x][z].position.first << board1.board[x][z].position.second << ' ';
+                            }cout << endl;
+
+                        }
+                    }
+                }
+            }
+            //if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
+
 
             window.draw(piece);
             window.display();
@@ -241,3 +272,4 @@ void Reset::restart()
 
 
 }
+//if (Keyboard::isKeyPressed(Keyboard::Tab)) { window.close(); rees.restart(); }
