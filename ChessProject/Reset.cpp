@@ -1,3 +1,4 @@
+#include "Reset.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -5,24 +6,17 @@
 #include "chessPiece.h"
 #include "getAvailableSquares.h"
 #include "Gameplay.h"
-#include "Reset.h"
-
 //definitions
 #define MODE_WIDTH 780
 #define MODE_HEIGHT 600
 
 using namespace std;
 using namespace sf;
-
-Reset res;
-
-
-int main()
+Reset rees;
+void Reset::restart()
 {
-
     vector<pair<double, double>>Clik;
     pair<double, double>XY_clickpos;
-    pair<double, double>valid_clickpos;
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
     Texture BackGround; BackGround.loadFromFile("textures/Chess Board.png");
@@ -87,8 +81,7 @@ int main()
     chessPiece King1B = chessPiece("Black", "King", { 1,5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
     while (true) {
         while (window.isOpen()) {
-            //Kareem : game restart
-            if (Keyboard::isKeyPressed(Keyboard::Tab)) { window.close(); res.restart(); }
+            if (Keyboard::isKeyPressed(Keyboard::Tab)) { window.close(); rees.restart(); }
 
             Event evnt;
             while (window.pollEvent(evnt)) {
@@ -212,9 +205,9 @@ int main()
 
             }
 
-            Vector2i mousepos = Mouse::getPosition(window);
             if (Mouse::isButtonPressed(Mouse::Left)) {
                 Clik.clear();
+                Vector2i mousepos = Mouse::getPosition(window);
                 for (int i = 1; i < 9; i++) {
                     for (int j = 1; j < 9; j++) {
                         if (mousepos.x > 60 * board1.board[i][j].getPos().second && mousepos.x < 60 * board1.board[i][j].getPos().second + 60 &&
@@ -230,9 +223,9 @@ int main()
                                 window.draw(validmove);
                             }
                         }
+
                     }
                 }
-
             }
             if (!Mouse::isButtonPressed(Mouse::Left)) {
                 for (int i = 0; i < Clik.size(); i++) {
@@ -240,31 +233,11 @@ int main()
                     window.draw(validmove);
                 }
             }
-            if (Mouse::isButtonPressed(Mouse::Left))
-            {
-                getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
-                vector<pair<ll, ll>>  ans = getAvailable.getSquares();
-                for (auto elem : ans)
-                {
-                    if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
-                    {
-                        valid_clickpos.first = elem.second; valid_clickpos.second = elem.first;
-                    }
-                }
-            }
-            if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
-
 
             window.draw(piece);
             window.display();
         }
     }
 
+
 }
-
-
-/*
-
-
-
-*/
