@@ -16,7 +16,7 @@ using namespace sf;
 int main()
 {
     vector<pair<double, double>>Clik;
-
+    pair<double, double>XY_clickpos;
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
     Texture BackGround; BackGround.loadFromFile("textures/Chess Board.png");
@@ -210,6 +210,7 @@ int main()
                     if (mousepos.x > 60 * board1.board[i][j].getPos().second && mousepos.x < 60 * board1.board[i][j].getPos().second + 60 &&
                         mousepos.y > 60 * board1.board[i][j].getPos().first && mousepos.y < 60 * board1.board[i][j].getPos().first + 60)
                     {
+                        XY_clickpos.first = i; XY_clickpos.second = j;
                         getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                         vector<pair<ll, ll>>  ans = getAvailable.getSquares();
                         for (auto elem : ans)
