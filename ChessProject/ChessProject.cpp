@@ -7,8 +7,8 @@
 #include "Gameplay.h"
 
 //definitions
-#define MODE_WIDTH 1299
-#define MODE_HEIGHT 1000
+#define MODE_WIDTH 780
+#define MODE_HEIGHT 600
 
 using namespace std;
 using namespace sf;
@@ -19,10 +19,10 @@ int main()
 
     RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
     Board board1 = Board();
-    Texture BackGround; BackGround.loadFromFile("textures/4774.png");
+    Texture BackGround; BackGround.loadFromFile("textures/11.png");
     Sprite back; back.setTexture(BackGround);
-    Texture Pieces; Pieces.loadFromFile("textures/pieces.png");
-    Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(100, 100, 100, 100)); piece.setPosition(100, 100);
+    Texture Pieces; Pieces.loadFromFile("textures/22.png");
+    Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(120, 60);
     CircleShape validmove(12); validmove.setFillColor(Color::Blue); validmove.setPosition(2000, 2000);
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
@@ -129,53 +129,53 @@ int main()
             for (int j = 1; j < 9; j++) {
                 if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(100, 100, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(60, 60, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(0, 200, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(0, 200, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(300, 0, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(300, 0, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
 
                 }
                 if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(300, 300, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(300, 300, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "King" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(400, 0, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(400, 0, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "King" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(400, 300, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(400, 300, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
 
 
                 if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "White")
                 {
-                    piece.setTextureRect(IntRect(100, 0, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(60, 0, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
                 if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "Black")
                 {
-                    piece.setTextureRect(IntRect(100, 300, 100, 100));
-                    piece.setPosition(100 * board1.board[i][j].getPos().second, 100 * board1.board[i][j].getPos().first);
+                    piece.setTextureRect(IntRect(60, 300, 60, 60));
+                    piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                     window.draw(piece);
                 }
 
@@ -188,15 +188,15 @@ int main()
             Vector2i mousepos = Mouse::getPosition(window);
             for (int i = 1; i < 9; i++) {
                 for (int j = 1; j < 9; j++) {
-                    if (mousepos.x > 100 * board1.board[i][j].getPos().second && mousepos.x < 100 * board1.board[i][j].getPos().second + 100 &&
-                        mousepos.y > 100 * board1.board[i][j].getPos().first && mousepos.y < 100 * board1.board[i][j].getPos().first + 100)
+                    if (mousepos.x > 60 * board1.board[i][j].getPos().second && mousepos.x < 60 * board1.board[i][j].getPos().second + 60 &&
+                        mousepos.y > 60 * board1.board[i][j].getPos().first && mousepos.y < 60 * board1.board[i][j].getPos().first + 60)
                     {
                         getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                         vector<pair<ll, ll>>  ans = getAvailable.getSquares();
                         for (auto elem : ans)
                         {
-                            Clik.push_back({ 100 * elem.second + 38, 100 * elem.first + 38 });
-                            validmove.setPosition(100 * elem.second + 38, 100 * elem.first + 38);
+                            Clik.push_back({ 60 * elem.second + 38, 60 * elem.first + 38 });
+                            validmove.setPosition(60 * elem.second + 38, 60 * elem.first + 38);
                             window.draw(validmove);
                         }
                     }
