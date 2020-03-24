@@ -50,7 +50,7 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 	//Case 2 of checkmate: Move to attacked position
 	if (currentPiece.type == "King") {
 		string kingTeam = currentPiece.team;
-		
+
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
 				chessPiece tmp = board1.board[i][j];
@@ -60,7 +60,7 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 					for (auto elem : positions) {
 
 						if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
-							
+
 							//checkmate
 							board1.board[startingPosition.first][startingPosition.second].isAlive = false;
 							return board1;
@@ -79,8 +79,10 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 	board1.board[targetPosition.first][targetPosition.second].isAlive = currentPiece.isAlive;
 	board1.board[targetPosition.first][targetPosition.second].team = currentPiece.team;
 	board1.board[targetPosition.first][targetPosition.second].type = currentPiece.type;
+
+	board1.board[targetPosition.first][targetPosition.second].position.first = targetPosition.first;
+	board1.board[targetPosition.first][targetPosition.second].position.second = targetPosition.second;
 	
-	currentPiece.position = { targetPosition.first, targetPosition.second };
 
 	return board1;
 }

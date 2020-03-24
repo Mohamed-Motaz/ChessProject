@@ -137,74 +137,74 @@ int main()
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 60, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Pawn" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(0, 120, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(180, 0, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
 
                     }
                     if (board1.board[i][j].type == "Queen" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(180, 180, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "King" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(240, 0, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "King" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(240, 180, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(60, 0, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Knight" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(60, 180, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(120, 0, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Bishop" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(120, 180, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "White")
                     {
                         piece.setTextureRect(IntRect(0, 0, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
                     if (board1.board[i][j].type == "Rook" && board1.board[i][j].team == "Black")
                     {
                         piece.setTextureRect(IntRect(0, 180, 60, 60));
-                        piece.setPosition(60 * j, 60 * i);
+                        piece.setPosition(60 * board1.board[i][j].getPos().second, 60 * board1.board[i][j].getPos().first);
                         window.draw(piece);
                     }
 
@@ -256,10 +256,10 @@ int main()
                         cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
                         for (int x = 1; x <= 8; x++) {
                             for (int z = 1; z <= 8; z++) {
-                                if (board1.board[x][z].team.size() == 0) {
+                                /*if (board1.board[x][z].team.size() == 0) {
                                     cout << "yay "; continue;
-                                }
-                                cout << board1.board[x][z].type << ' ';
+                                }*/
+                                cout << board1.board[x][z].position.first << board1.board[x][z].position.second << ' ';
                             }cout << endl;
                             
                         }
