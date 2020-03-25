@@ -138,17 +138,25 @@ int main()
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				Vector2i mouseposs = Mouse::getPosition(window);
-				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 330 && mouseposs.y <= 390)
-					window.close();
-
-			}
-
-			if (Mouse::isButtonPressed(Mouse::Left))
-			{
-				Vector2i mouseposs = Mouse::getPosition(window);
 				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 215 && mouseposs.y <= 274)
 					icon = true;
 			}
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				Vector2i mouseposs = Mouse::getPosition(window);
+				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 330 && mouseposs.y <= 390)
+				{
+					if (icon == true)
+					{
+						break;
+					}
+					else
+					{
+						window.close();
+					}
+				}
+			}
+
 			if (icon)
 			{
 				window.clear();
@@ -300,7 +308,6 @@ int main()
 					}
 				}
 				//if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
-
 
 				window.draw(piece);
 			}
