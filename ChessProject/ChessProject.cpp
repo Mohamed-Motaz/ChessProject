@@ -278,7 +278,7 @@ int main()
 						window.draw(validmove);
 					}
 				}
-				if (Mouse::isButtonPressed(Mouse::Left))
+				if (Mouse::isButtonPressed(Mouse::Right))
 				{
 					cout << "yayayaya" << endl;
 					getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
