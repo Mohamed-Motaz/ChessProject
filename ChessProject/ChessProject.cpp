@@ -247,7 +247,7 @@ int main()
 
 
 				Vector2i mousepos = Mouse::getPosition(window);
-				if (Mouse::isButtonPressed(Mouse::Left)) {
+				if (Mouse::isButtonPressed(Mouse::Right)) {
 					Clik.clear();
 					for (int i = 1; i < 9; i++) {
 						for (int j = 1; j < 9; j++) {
@@ -272,13 +272,13 @@ int main()
 
 				}
 
-				if (!Mouse::isButtonPressed(Mouse::Left)) {
+				if (!Mouse::isButtonPressed(Mouse::Right)) {
 					for (int i = 0; i < Clik.size(); i++) {
 						validmove.setPosition(Clik[i].first, Clik[i].second);
 						window.draw(validmove);
 					}
 				}
-				if (Mouse::isButtonPressed(Mouse::Right))
+				if (Mouse::isButtonPressed(Mouse::Left))
 				{
 					cout << "yayayaya" << endl;
 					getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
