@@ -320,7 +320,7 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 		}
 	}
 	
-	vector<pair<ll, ll>> allAttackedSquares = kingCheckAllSquaresAttacked();
+	/*vector<pair<ll, ll>> allAttackedSquares = kingCheckAllSquaresAttacked();
 	for (auto elem1 : answer) {
 		bool attacked = false;
 		for (auto elem2 : allAttackedSquares) {
@@ -333,23 +333,25 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 		if (!attacked) finalAnswer.push_back(elem1);
 	}
 	
-	return finalAnswer;
+	return finalAnswer;*/
+	return answer;
+
 }
 
-
-vector<pair<ll, ll>> getAvailableSquares::kingCheckAllSquaresAttacked() {
-	vector<pair<ll, ll>> answers;
-
-	for (int i = 1; i <= 8; i++) {
-		for (int j = 1; j <= 8; j++) {
-			//check if peice is a different team and make sure it isnt empty
-			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0 && board1.board[i][j].type != "King") {
-				getAvailableSquares getAvailable(board1.board[i][j], board1);
-				vector<pair<ll, ll>> sol = getAvailable.getSquares();
-				for (auto elem : sol) answers.push_back(elem);
-			}
-		}
-	}
-
-	return answers;
-}
+//
+//vector<pair<ll, ll>> getAvailableSquares::kingCheckAllSquaresAttacked() {
+//	vector<pair<ll, ll>> answers;
+//
+//	for (int i = 1; i <= 8; i++) {
+//		for (int j = 1; j <= 8; j++) {
+//			//check if peice is a different team and make sure it isnt empty
+//			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0 && board1.board[i][j].type != "King") {
+//				getAvailableSquares getAvailable(board1.board[i][j], board1);
+//				vector<pair<ll, ll>> sol = getAvailable.getSquares();
+//				for (auto elem : sol) answers.push_back(elem);
+//			}
+//		}
+//	}
+//
+//	return answers;
+//}
