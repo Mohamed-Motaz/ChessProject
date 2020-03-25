@@ -92,10 +92,19 @@ int main()
 	//Black King
 	chessPiece King1B = chessPiece("Black", "King", { 1, 5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
 	while (true) {
-		while (window.isOpen()) {
-			//Kareem : game restart
-			if (Keyboard::isKeyPressed(Keyboard::Tab)) { window.close(); res.restart(); }
+		while (window.isOpen()) {//While loop 3ashn lama ye3mel window.close() ye5sh tany fi loop el game
 
+			Vector2i mousepos = Mouse::getPosition(window);
+			//Kareem : game restart
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				if (mousepos.x > 698.514 && mousepos.x < 698.514 + 70 && mousepos.y>514 && mousepos.y < 514 + 70) {
+					window.close(); res.restart();
+				}
+				if (mousepos.x > 693.19 && mousepos.x < 693.19 + 75 && mousepos.y>19 && mousepos.y < 19 + 72) {
+					icon = false;
+				}
+			}
 			Event evnt;
 			while (window.pollEvent(evnt)) {
 				if (evnt.type == Event::Closed) {
@@ -135,26 +144,14 @@ int main()
 			cout << "INVALID MOVE" << endl;
 			}*/
 			window.draw(menuu);
-			if (Mouse::isButtonPressed(Mouse::Left))
+			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 330 && mousepos.y <= 390)
 			{
-				Vector2i mouseposs = Mouse::getPosition(window);
-				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 215 && mouseposs.y <= 274)
-					icon = true;
+				window.close();
 			}
-			if (Mouse::isButtonPressed(Mouse::Left))
+
+			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 215 && mousepos.y <= 274)
 			{
-				Vector2i mouseposs = Mouse::getPosition(window);
-				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 330 && mouseposs.y <= 390)
-				{
-					if (icon == true)
-					{
-						break;
-					}
-					else
-					{
-						window.close();
-					}
-				}
+				window.close(); res.restart(); icon = true;
 			}
 
 			if (icon)
