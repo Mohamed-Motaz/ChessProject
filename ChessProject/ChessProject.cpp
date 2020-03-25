@@ -138,6 +138,14 @@ int main()
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				Vector2i mouseposs = Mouse::getPosition(window);
+				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 330 && mouseposs.y <= 390)
+					window.close();
+
+			}
+
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				Vector2i mouseposs = Mouse::getPosition(window);
 				if (mouseposs.x >= 290 && mouseposs.x <= 460 && mouseposs.y >= 215 && mouseposs.y <= 274)
 					icon = true;
 			}
