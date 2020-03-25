@@ -30,6 +30,7 @@ int main()
     Texture Pieces; Pieces.loadFromFile("textures/Pieces.png");
     Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(60, 60);
     CircleShape validmove(6); validmove.setFillColor(Color::Blue); validmove.setPosition(1000, 1000);
+    int counter = 0;
     //White Pawns
     chessPiece Pawn1W = chessPiece("White", "Pawn", { 7,1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
     chessPiece Pawn2W = chessPiece("White", "Pawn", { 7,2 }, true); board1.board[Pawn2W.getPos().first][Pawn2W.getPos().second] = Pawn2W;
@@ -224,6 +225,9 @@ int main()
                             XY_clickpos.first = i; XY_clickpos.second = j;
                             getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
                             vector<pair<ll, ll>>  ans = getAvailable.getSquares();
+                            chessPiece currentPiece = board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second];
+                            if (counter % 2 == 0 && currentPiece.team != "White") break;
+                            if (counter % 2 != 0 && currentPiece.team != "Black") break;
                             for (auto elem : ans)
                             {
                                 Clik.push_back({ 60 * elem.second + 25, 60 * elem.first + 25 });
@@ -235,6 +239,7 @@ int main()
                 }
 
             }
+
             if (!Mouse::isButtonPressed(Mouse::Left)) {
                 for (int i = 0; i < Clik.size(); i++) {
                     validmove.setPosition(Clik[i].first, Clik[i].second);
@@ -251,6 +256,9 @@ int main()
                 {
                     if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
                     {
+                        chessPiece currentPiece = board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second];
+                        if (counter % 2 == 0 && currentPiece.team != "White") break;
+                        if (counter % 2 != 0 && currentPiece.team != "Black") break;
                         valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
                         board1 = Gameplay::MovePiece({XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
                         cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
@@ -263,6 +271,7 @@ int main()
                             }cout << endl;
                             
                         }
+                        counter++;
                     }
                 }
             }

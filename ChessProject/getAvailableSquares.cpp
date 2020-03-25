@@ -308,7 +308,8 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 {
 	//return a vector of all valid squares for the bishop
 	//can move one square only anywhere
-	vector<pair<ll, ll>> answer;
+	vector<pair<ll, ll>> answer, temp;
+	vector<pair<ll, ll>> finalAnswer;
 	int xaxis[] = { 1,1,1,-1,-1,-1,0,0 };
 	int yaxis[] = { 1,0,-1,-1,1,0,1,-1 };
 	for (int i = 0; i < 8; i++)
@@ -316,6 +317,14 @@ vector<pair<ll, ll>> getAvailableSquares::getKingSquares()
 		if (isValid(piece.getPos().first + xaxis[i], piece.getPos().second + yaxis[i]))
 		{
 			answer.push_back({ piece.getPos().first + xaxis[i],piece.getPos().second + yaxis[i] });
+		}
+	}
+	for (int i = 1; i <= 8; i++) {
+		for (int j = 1; j <= 8; j++) {
+			if (board1.board[i][j].type != piece.type && board1.board[i][j].type.size() == 0 && board1.board[i][j].type != "King") {
+				getAvailableSquares getAvailable(board1.board[i][j], board1);
+				vector<pair<ll, ll>> sol = getAvailable.getSquares();
+			}
 		}
 	}
 	vector<pair<ll, ll>> allAttackedSquares = kingCheckAllSquaresAttacked();
@@ -328,7 +337,7 @@ vector<pair<ll, ll>> getAvailableSquares::kingCheckAllSquaresAttacked() {
 	for (int i = 1; i <= 8; i++) {
 		for (int j = 1; j <= 8; j++) {
 			//check if peice is a different team and make sure it isnt empty
-			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0) {
+			if (board1.board[i][j].team != piece.team && board1.board[i][j].team.size() != 0 && board1.board[i][j].type != "King") {
 				//getAvailableSquares getAvailable = getAvailableSquares(board1.board[i][j], board1);
 				//vector<pair<ll, ll>> ans = getAvailable.getSquares();
 				/*for (auto elem : ans) {
