@@ -62,6 +62,7 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 	//					if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
 
 	//						//checkmate
+	//						cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
 	//						board1.board[startingPosition.first][startingPosition.second].isAlive = false;
 	//						return board1;
 	//						//###############################################################################################################################################################################
@@ -81,47 +82,102 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 	board1.board[targetPosition.first][targetPosition.second].type = currentPiece.type;
 	board1.board[targetPosition.first][targetPosition.second].position.first = targetPosition.first;
 	board1.board[targetPosition.first][targetPosition.second].position.second = targetPosition.second;
-	
+	cout << "PIECE IS NOW MOVED" << endl;
 	return board1;
 }
 
 
 bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targetPosition, Board board1)
 {
-	chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
+	cout << "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAy" << endl;
+	//chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
 	//Case 1: King is attacked
 	//		  No available squares
 	//		  No piece can block the attack
-	cout << "in" << endl;
-	if (currentPiece.type == "King") {
-		string kingTeam = currentPiece.team;
+	chessPiece king = board1.board[startingPosition.first][startingPosition.second];
 
+		bool attacked = false;
+		int attackers = 0;
+		//king is attacked
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
-				chessPiece tmp = board1.board[i][j];
-				if (tmp.type.size() != 0 && tmp.team != kingTeam) {
-					cout << "in" << endl;
-					getAvailableSquares getAvailable(tmp, board1);
-					vector<pair<ll, ll>> positions = getAvailable.getSquares();
-					for (auto elem : positions) {
-
-						if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
-							cout << "oooooooooooooooooooooooooooooooops";
-							//checkmate
-							//board1.board[startingPosition.first][startingPosition.second].isAlive = false;
-							return true;
-							//###############################################################################################################################################################################
-							//##################################################################################MUST CHECK IF KING IS DEAD###################################################################
-							//###############################################################################################################################################################################
+				chessPiece currentPiece = board1.board[i][j];
+				if (currentPiece.team != king.team && currentPiece.team.size() != 0) {
+					getAvailableSquares getAvailable(currentPiece, board1);
+					vector<pair<ll, ll>> ans = getAvailable.getSquares();
+					for (auto elem : ans) {
+						if (elem.first == king.position.first && elem.second == king.position.second) {
+							attacked = true;
+							attackers++;
+							break;
 						}
 					}
 				}
 			}
 		}
-	}
+		if (!attacked) {
+			return false;
+		}
+		//get available squares fir king
+		getAvailableSquares getAvailable(king, board1);
+		vector<pair<ll, ll>> ans = getAvailable.getSquares();
+		int numberofUnavaliable = 0;
+		for (auto elem : ans) {
+			bool notAvaliable = false;
+			for (int i = 1; i <= 8; i++) {
+				for (int j = 1; j <= 8; j++) {
+					chessPiece currentPiece = board1.board[i][j];
+					if (currentPiece.team != king.team && currentPiece.team.size() != 0) {
+						getAvailableSquares getAvailable(currentPiece, board1);
+						vector<pair<ll, ll>> answer = getAvailable.getSquares();
+						for (auto elemen : answer) {
+							if (elemen.first == elem.first && elemen.second == elem.second) {
+								notAvaliable = true;
+								break;
+							}
+						}
+					}
+				}
+			}
+			if (notAvaliable)
+				numberofUnavaliable++;
+		}
+		if (numberofUnavaliable == ans.size() && attackers > 1) {
+			return true;
+		}
+	
 	//Case 2: King moves to attacked position
 	//implemented in MovePiece method
+	//cout << "innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" << endl;
+	//if (currentPiece.type == "King") {
+	//	string kingTeam = currentPiece.team;
 
+	//	for (int i = 1; i <= 8; i++) {
+	//		for (int j = 1; j <= 8; j++) {
+	//			chessPiece tmp = board1.board[i][j];
+	//			if (tmp.type.size() != 0 && tmp.team != kingTeam) {
+	//				cout << "in" << endl;
+	//				getAvailableSquares getAvailable(tmp, board1);
+	//				vector<pair<ll, ll>> positions = getAvailable.getSquares();
+	//				for (auto elem : positions) {
+
+	//					if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
+	//						cout << "oooooooooooooooooooooooooooooooops";
+	//						//checkmate
+	//						//board1.board[startingPosition.first][startingPosition.second].isAlive = false;
+	//						return true;
+	//						//###############################################################################################################################################################################
+	//						//##################################################################################MUST CHECK IF KING IS DEAD###################################################################
+	//						//###############################################################################################################################################################################
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+	
+		
+	
 	//Case 3: Only king can attack piece BUT piece is defended
 	//already taken care of
 	return false;
