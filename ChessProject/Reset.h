@@ -10,6 +10,8 @@
 class Reset
 {
 public:
-	void restart();
+
+	bool restart(bool isSoundOn_restart, bool isSoundOff_restart);
+
 };
 

@@ -19,22 +19,42 @@ Reset res;
 
 int main()
 {
+	RenderWindow start_up(VideoMode(970, 546), "CHESS-THE GAME OF KINGS");
+	Texture StartUp;	StartUp.loadFromFile("textures/Start_Up.png");
+	Sprite startUp;	startUp.setTexture(StartUp);
+	while (start_up.isOpen()) {
+
+		for (long long i = 0; i < 4000; i++) {
+			start_up.clear(); start_up.draw(startUp); start_up.display();
+		}
+		start_up.close();
+	}
+
+
 
 	vector<pair<double, double>>Clik;
 	pair<double, double>XY_clickpos;
 	pair<double, double>valid_clickpos;
-	RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "Chess Game");
+	RenderWindow window(VideoMode(MODE_WIDTH, MODE_HEIGHT), "CHESS-THE GAME OF KINGS");
+	//////INSTRUCTIONS WINDOW////////////////////////////////////////////////////////////////
+	RenderWindow INSTRUCTIONS(VideoMode(380, 170), "INSTRUCTIONS");
+	Texture Inst;	Inst.loadFromFile("textures/Inst.png");
+	Sprite inst;	inst.setTexture(Inst);
+	while (INSTRUCTIONS.isOpen()) { Event evnt; while (INSTRUCTIONS.pollEvent(evnt)) { if (evnt.type == Event::Closed) { INSTRUCTIONS.close(); } }INSTRUCTIONS.clear(); INSTRUCTIONS.draw(inst); INSTRUCTIONS.display(); }
+	///////////////////////////////////////////////////////////////////////////////////////
 	Board board1 = Board();
 	Texture BackGround; BackGround.loadFromFile("textures/Chess Board.png");
 	Sprite back; back.setTexture(BackGround);
 	Texture Pieces; Pieces.loadFromFile("textures/Pieces.png");
 	Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(60, 60);
 	CircleShape validmove(6); validmove.setFillColor(Color::Blue); validmove.setPosition(1000, 1000);
-	Texture menu;
-	menu.loadFromFile("textures/Menu.png");
-	Sprite menuu;
-	menuu.setTexture(menu);
-	bool icon = false;
+	Texture menu;	menu.loadFromFile("textures/Menu.png");
+	Sprite menuu;	menuu.setTexture(menu);
+	Texture soundon;	soundon.loadFromFile("textures/soundButton.png");
+	Sprite SoundOn;	SoundOn.setTexture(soundon); SoundOn.setPosition(1000, 1000);
+	Texture soundoff;	soundoff.loadFromFile("textures/soundOff.png");
+	Sprite SoundOff;	SoundOff.setTexture(soundoff); SoundOff.setPosition(1000, 1000);
+	bool icon = false, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = false, isSoundOn = true;
 	int counter = 0;
 	//White Pawns
 	chessPiece Pawn1W = chessPiece("White", "Pawn", { 7, 1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
@@ -91,20 +111,9 @@ int main()
 
 	//Black King
 	chessPiece King1B = chessPiece("Black", "King", { 1, 5 }, true); board1.board[King1B.getPos().first][King1B.getPos().second] = King1B;
-	while (true) {
-		while (window.isOpen()) {//While loop 3ashn lama ye3mel window.close() ye5sh tany fi loop el game
+	while (true) {//While loop 3ashn lama ye3mel window.close() ye5sh tany fi loop el game
+		while (window.isOpen()) {
 
-			Vector2i mousepos = Mouse::getPosition(window);
-			//Kareem : game restart
-			if (Mouse::isButtonPressed(Mouse::Left))
-			{
-				if (mousepos.x > 698.514 && mousepos.x < 698.514 + 70 && mousepos.y>514 && mousepos.y < 514 + 70) {
-					window.close(); res.restart();
-				}
-				if (mousepos.x > 693.19 && mousepos.x < 693.19 + 75 && mousepos.y>19 && mousepos.y < 19 + 72) {
-					icon = false;
-				}
-			}
 			Event evnt;
 			while (window.pollEvent(evnt)) {
 				if (evnt.type == Event::Closed) {
@@ -143,6 +152,17 @@ int main()
 			else {
 			cout << "INVALID MOVE" << endl;
 			}*/
+			//Kareem : window clicks
+			Vector2i mousepos = Mouse::getPosition(window);
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				if (mousepos.x > 698.514 && mousepos.x < 698.514 + 70 && mousepos.y>514 && mousepos.y < 514 + 70 && icon == true) {
+					window.close(); res.restart(isSoundOn, isSoundOff);
+				}
+				if (mousepos.x > 693.19 && mousepos.x < 693.19 + 75 && mousepos.y>19 && mousepos.y < 19 + 72 && icon == true) {
+					icon = false;
+				}
+			}
 			window.draw(menuu);
 			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 330 && mousepos.y <= 390)
 			{
@@ -151,7 +171,26 @@ int main()
 
 			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 215 && mousepos.y <= 274)
 			{
-				window.close(); res.restart(); icon = true;
+				window.close(); res.restart(isSoundOn, isSoundOff); icon = true;
+			}
+
+			//Sound Tabs
+			if (Mouse::isButtonPressed(Mouse::Left) && isSoundOn == 1 && isSoundOff == 0 && icon == false && mousepos.x >= 677 && mousepos.x <= 745 && mousepos.y >= 109 && mousepos.y <= 177)
+			{
+				isSoundOn = 0;	isSoundOff = 1;
+			}
+			else if (Mouse::isButtonPressed(Mouse::Right) && isSoundOn == 0 && isSoundOff == 1 && icon == false && mousepos.x >= 677 && mousepos.x <= 745 && mousepos.y >= 109 && mousepos.y <= 177)
+			{
+				isSoundOn = 1;	isSoundOff = 0;
+			}
+
+			if (isSoundOff == 0 && isSoundOn == 1 && icon == false)
+			{
+				SoundOn.setPosition(677, 109);	window.draw(SoundOn);
+			}
+			else if (isSoundOn == 0 && isSoundOff == 1 && icon == false)
+			{
+				SoundOff.setPosition(677, 109); window.draw(SoundOff);
 			}
 
 			if (icon)
@@ -243,8 +282,8 @@ int main()
 				// Kareem : drawing the pieces according their board positions
 
 
-				Vector2i mousepos = Mouse::getPosition(window);
 				if (Mouse::isButtonPressed(Mouse::Right)) {
+					valid_disappear = false;
 					Clik.clear();
 					for (int i = 1; i < 9; i++) {
 						for (int j = 1; j < 9; j++) {
@@ -269,14 +308,16 @@ int main()
 
 				}
 
-				if (!Mouse::isButtonPressed(Mouse::Right)) {
+				if (!Mouse::isButtonPressed(Mouse::Right) && valid_disappear == false) {
 					for (int i = 0; i < Clik.size(); i++) {
 						validmove.setPosition(Clik[i].first, Clik[i].second);
 						window.draw(validmove);
 					}
 				}
+
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
+					valid_disappear = true;
 					cout << "yayayaya" << endl;
 					getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
 					vector<pair<ll, ll>>  ans = getAvailable.getSquares();
@@ -312,7 +353,6 @@ int main()
 
 		}
 	}
-
 }
 
 
