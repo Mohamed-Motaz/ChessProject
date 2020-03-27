@@ -47,7 +47,8 @@ int main()
 	Sprite back; back.setTexture(BackGround);
 	Texture Pieces; Pieces.loadFromFile("textures/Pieces.png");
 	Sprite piece; piece.setTexture(Pieces); piece.setTextureRect(IntRect(60, 60, 60, 60)); piece.setPosition(60, 60);
-	CircleShape validmove(6); validmove.setFillColor(Color::Blue); validmove.setPosition(1000, 1000);
+	CircleShape validmovewhite(6); validmovewhite.setFillColor(Color::White); validmovewhite.setPosition(1000, 1000);
+	CircleShape validmoveblack(6); validmoveblack.setFillColor(Color::Black); validmoveblack.setPosition(1000, 1000);
 	Texture menu;	menu.loadFromFile("textures/Menu.png");
 	Sprite menuu;	menuu.setTexture(menu);
 	Texture soundon;	soundon.loadFromFile("textures/soundButton.png");
@@ -299,8 +300,18 @@ int main()
 								for (auto elem : ans)
 								{
 									Clik.push_back({ 60 * elem.second + 25, 60 * elem.first + 25 });
-									validmove.setPosition(60 * elem.second + 25, 60 * elem.first + 25);
-									window.draw(validmove);
+									if (counter % 2 == 0)
+									{
+										validmovewhite.setPosition(60 * elem.second + 25, 60 * elem.first + 25);
+										window.draw(validmovewhite);
+
+									}
+									if (counter % 2 != 0)
+									{
+										validmoveblack.setPosition(60 * elem.second + 25, 60 * elem.first + 25);
+										window.draw(validmoveblack);
+
+									}
 								}
 							}
 						}
@@ -310,8 +321,17 @@ int main()
 
 				if (!Mouse::isButtonPressed(Mouse::Right) && valid_disappear == false) {
 					for (int i = 0; i < Clik.size(); i++) {
-						validmove.setPosition(Clik[i].first, Clik[i].second);
-						window.draw(validmove);
+						validmovewhite.setPosition(Clik[i].first, Clik[i].second);
+						validmoveblack.setPosition(Clik[i].first, Clik[i].second);
+
+						if (counter % 2 == 0)
+						{
+							window.draw(validmovewhite);
+						}
+						if (counter % 2 != 0)
+						{
+							window.draw(validmoveblack);
+						}
 					}
 				}
 
