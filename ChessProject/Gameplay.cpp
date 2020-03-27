@@ -47,54 +47,36 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 {
 	chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
 
-	////Case 2 of checkmate: Move to attacked position
-	//if (currentPiece.type == "King") {
-	//	string kingTeam = currentPiece.team;
+	////CheckMate
+	if (currentPiece.type == "King") {
+		//Case 2 of checkmate: Move to attacked position
+		string kingTeam = currentPiece.team;
 
-	//	for (int i = 1; i <= 8; i++) {
-	//		for (int j = 1; j <= 8; j++) {
-	//			chessPiece tmp = board1.board[i][j];
-	//			if (tmp.type.size() != 0 && tmp.team != kingTeam) {
-	//				getAvailableSquares getAvailable(tmp, board1);
-	//				vector<pair<ll, ll>> positions = getAvailable.getSquares();
-	//				for (auto elem : positions) {
+		for (int i = 1; i <= 8; i++) {
+			for (int j = 1; j <= 8; j++) {
+				chessPiece tmp = board1.board[i][j];
+				if (tmp.type.size() != 0 && tmp.team != kingTeam) {
+					getAvailableSquares getAvailable(tmp, board1);
+					vector<pair<ll, ll>> positions = getAvailable.getSquares();
+					for (auto elem : positions) {
 
-	//					if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
+						if (elem.first == targetPosition.first && elem.second == targetPosition.second) {
 
-	//						//checkmate
-	//						cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
-	//						board1.board[startingPosition.first][startingPosition.second].isAlive = false;
-	//						return board1;
-	//						//###############################################################################################################################################################################
-	//						//##################################################################################MUST CHECK IF KING IS DEAD###################################################################
-	//						//###############################################################################################################################################################################
-	//					}
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-	cout << "starting position for piece " << currentPiece.team << " " << currentPiece.type << " is " << startingPosition.first << " " << startingPosition.second << endl;
-	cout << "target position is " << targetPosition.first << " " << targetPosition.second << endl;
-	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
-	board1.board[targetPosition.first][targetPosition.second].isAlive = currentPiece.isAlive;
-	board1.board[targetPosition.first][targetPosition.second].team = currentPiece.team;
-	board1.board[targetPosition.first][targetPosition.second].type = currentPiece.type;
-	board1.board[targetPosition.first][targetPosition.second].position.first = targetPosition.first;
-	board1.board[targetPosition.first][targetPosition.second].position.second = targetPosition.second;
-	cout << "PIECE IS NOW MOVED" << endl;
-	return board1;
-}
-
-
-bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targetPosition, Board board1)
-{
-	cout << "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAy" << endl;
-	//chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
-	//Case 1: King is attacked
-	//		  No available squares
-	//		  No piece can block the attack
-	chessPiece king = board1.board[startingPosition.first][startingPosition.second];
+							//checkmate
+							cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
+							board1.board[startingPosition.first][startingPosition.second].isAlive = false;
+							//return board1;
+							//###############################################################################################################################################################################
+							//##################################################################################MUST CHECK IF KING IS DEAD###################################################################
+							//###############################################################################################################################################################################
+						}
+					}
+				}
+			}
+		}
+		
+		//Case 1 of checkmate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		chessPiece king = board1.board[startingPosition.first][startingPosition.second];
 
 		bool attacked = false;
 		int attackers = 0;
@@ -116,7 +98,7 @@ bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targe
 			}
 		}
 		if (!attacked) {
-			return false;
+			//return board1; //false no checkmate
 		}
 		//get available squares fir king
 		getAvailableSquares getAvailable(king, board1);
@@ -143,8 +125,31 @@ bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targe
 				numberofUnavaliable++;
 		}
 		if (numberofUnavaliable == ans.size() && attackers > 1) {
-			return true;
+			cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
+			//return board1; //true, checkmate occured
 		}
+	}
+	cout << "starting position for piece " << currentPiece.team << " " << currentPiece.type << " is " << startingPosition.first << " " << startingPosition.second << endl;
+	cout << "target position is " << targetPosition.first << " " << targetPosition.second << endl;
+	board1.board[startingPosition.first][startingPosition.second] = chessPiece();
+	board1.board[targetPosition.first][targetPosition.second].isAlive = currentPiece.isAlive;
+	board1.board[targetPosition.first][targetPosition.second].team = currentPiece.team;
+	board1.board[targetPosition.first][targetPosition.second].type = currentPiece.type;
+	board1.board[targetPosition.first][targetPosition.second].position.first = targetPosition.first;
+	board1.board[targetPosition.first][targetPosition.second].position.second = targetPosition.second;
+	cout << "PIECE IS NOW MOVED" << endl;
+	return board1;
+}
+
+
+bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targetPosition, Board board1)
+{
+	cout << "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAy" << endl;
+	//chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
+	//Case 1: King is attacked
+	//		  No available squares
+	//		  No piece can block the attack
+	
 	
 	//Case 2: King moves to attacked position
 	//implemented in MovePiece method
