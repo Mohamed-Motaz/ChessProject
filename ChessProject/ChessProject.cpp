@@ -318,13 +318,14 @@ int main()
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
 					valid_disappear = true;
-					cout << "yayayaya" << endl;
+					cout << "yayayaya#####################################################" << endl;
 					getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
 					vector<pair<ll, ll>>  ans = getAvailable.getSquares();
-					cout << ans.size() << endl;
+					cout << "vector size is #####################################################################################                 " << ans.size() << endl;
 					
 					for (auto elem : ans)
 					{
+						cout << "INNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" << endl;
 						if (mousepos.x > 60 * elem.second && mousepos.x < 60 * elem.second + 60 && mousepos.y > 60 * elem.first && mousepos.y < 60 * elem.first + 60)
 						{
 							chessPiece currentPiece = board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second];
