@@ -55,6 +55,13 @@ int main()
 	Sprite SoundOn;	SoundOn.setTexture(soundon); SoundOn.setPosition(1000, 1000);
 	Texture soundoff;	soundoff.loadFromFile("textures/soundOff.png");
 	Sprite SoundOff;	SoundOff.setTexture(soundoff); SoundOff.setPosition(1000, 1000);
+	Music music;
+	if (!music.openFromFile("Chesssong.ogg"))
+	{
+		return 1;
+	}
+	music.setLoop(true);
+	music.play();
 	bool icon = false, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = false, isSoundOn = true;
 	int counter = 0;
 	//White Pawns
