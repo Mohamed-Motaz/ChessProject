@@ -287,7 +287,7 @@ int main()
 
 				}
 
-				// Kareem : drawing the pieces according their board positions
+				// Kareem : drawing the pieces according their board positionsc
 
 
 				if (Mouse::isButtonPressed(Mouse::Right)) {
@@ -341,7 +341,7 @@ int main()
 						}
 					}
 				}
-
+				
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
 					valid_disappear = true;
