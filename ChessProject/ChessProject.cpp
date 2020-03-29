@@ -19,6 +19,7 @@ Reset res;
 
 int main()
 {
+
 	RenderWindow start_up(VideoMode(736, 534), "CHESS-THE GAME OF KINGS");
 	Texture StartUp;	StartUp.loadFromFile("textures/TreeStartUp.png");
 	Sprite startUp;	startUp.setTexture(StartUp);
@@ -29,8 +30,6 @@ int main()
 		}
 		start_up.close();
 	}
-
-
 
 	vector<pair<double, double>>Clik;
 	pair<double, double>XY_clickpos;
@@ -55,14 +54,18 @@ int main()
 	Sprite SoundOn;	SoundOn.setTexture(soundon); SoundOn.setPosition(1000, 1000);
 	Texture soundoff;	soundoff.loadFromFile("textures/soundOff.png");
 	Sprite SoundOff;	SoundOff.setTexture(soundoff); SoundOff.setPosition(1000, 1000);
+
 	Music music;
-	if (!music.openFromFile("Chesssong.ogg"))
-	{
-		return 1;
-	}
+	music.openFromFile("Fly Me To The Moon.ogg");
 	music.setLoop(true);
-	music.play();
-	bool icon = false, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = false, isSoundOn = true;
+
+
+	SoundBuffer buffer;
+	buffer.loadFromFile("CPsound.wav");
+	Sound put;
+	put.setBuffer(buffer);
+
+	bool icon = false, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = false, isSoundOn = true, mc = 1;
 	int counter = 0;
 	//White Pawns
 	chessPiece Pawn1W = chessPiece("White", "Pawn", { 7, 1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
@@ -165,7 +168,7 @@ int main()
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				if (mousepos.x > 698.514 && mousepos.x < 698.514 + 70 && mousepos.y>514 && mousepos.y < 514 + 70 && icon == true) {
-					window.close(); res.restart(isSoundOn, isSoundOff);
+					window.close(); music.pause(); res.restart(isSoundOn, isSoundOff); icon = true;
 				}
 				if (mousepos.x > 693.19 && mousepos.x < 693.19 + 75 && mousepos.y>19 && mousepos.y < 19 + 72 && icon == true) {
 					icon = false;
@@ -179,7 +182,7 @@ int main()
 
 			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 215 && mousepos.y <= 274)
 			{
-				window.close(); res.restart(isSoundOn, isSoundOff); icon = true;
+				window.close(); music.pause(); res.restart(isSoundOn, isSoundOff); icon = true;
 			}
 
 			//Sound Tabs
@@ -195,11 +198,15 @@ int main()
 			if (isSoundOff == 0 && isSoundOn == 1 && icon == false)
 			{
 				SoundOn.setPosition(677, 109);	window.draw(SoundOn);
+				//music.play();
 			}
 			else if (isSoundOn == 0 && isSoundOff == 1 && icon == false)
 			{
 				SoundOff.setPosition(677, 109); window.draw(SoundOff);
+				//music.pause();
 			}
+			if (isSoundOn == 1 && isSoundOff == 0 && mc == 1) { music.play(); mc = 0; }
+			if (isSoundOn == 0 && isSoundOff == 1 && mc == 0) { music.pause(); mc = 1; }
 
 			if (icon)
 			{
