@@ -20,7 +20,7 @@ Reset res;
 int main()
 {
 	RenderWindow start_up(VideoMode(736, 534), "CHESS-THE GAME OF KINGS");
-	Texture StartUp;	StartUp.loadFromFile("textures/TreeStartUp.png");
+	/*Texture StartUp;	StartUp.loadFromFile("textures/TreeStartUp.png");
 	Sprite startUp;	startUp.setTexture(StartUp);
 	while (start_up.isOpen()) {
 
@@ -28,7 +28,7 @@ int main()
 			start_up.clear(); start_up.draw(startUp); start_up.display();
 		}
 		start_up.close();
-	}
+	}*/
 
 
 
