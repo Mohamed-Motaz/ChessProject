@@ -15,6 +15,7 @@ using namespace sf;
 Reset rees;
 bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 {
+
 	vector<pair<double, double>>Clik;
 	pair<double, double>XY_clickpos;
 	pair<double, double>valid_clickpos;
@@ -31,7 +32,16 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 	Sprite SoundOn;	SoundOn.setTexture(soundon); SoundOn.setPosition(1000, 1000);
 	Texture soundoff;	soundoff.loadFromFile("textures/soundOff.png");
 	Sprite SoundOff;	SoundOff.setTexture(soundoff); SoundOff.setPosition(1000, 1000);
-	bool icon = true, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = isSoundOff_restart, isSoundOn = isSoundOn_restart;
+
+	Music music;
+	music.openFromFile("Fly Me To The Moon.ogg");
+	music.setLoop(true);
+
+	SoundBuffer buffer;
+	buffer.loadFromFile("CPsound.wav");
+	Sound put;
+	put.setBuffer(buffer);
+	bool icon = true, valid_disappear = false, issound_tab = false, ismenusetting = false, isSoundOff = isSoundOff_restart, isSoundOn = isSoundOn_restart, mc = 1;
 	int counter = 0;
 	//White Pawns
 	chessPiece Pawn1W = chessPiece("White", "Pawn", { 7, 1 }, true); board1.board[Pawn1W.getPos().first][Pawn1W.getPos().second] = Pawn1W;
@@ -134,7 +144,7 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				if (mousepos.x > 698.514 && mousepos.x < 698.514 + 70 && mousepos.y>514 && mousepos.y < 514 + 70 && icon == true) {
-					window.close(); rees.restart(isSoundOn, isSoundOff);
+					window.close(); music.pause(); rees.restart(isSoundOn, isSoundOff); icon = false;
 				}
 				if (mousepos.x > 693.19 && mousepos.x < 693.19 + 75 && mousepos.y>19 && mousepos.y < 19 + 72 && icon == true) {
 					icon = false;
@@ -148,7 +158,7 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 
 			if (Mouse::isButtonPressed(Mouse::Left) && icon == false && mousepos.x >= 290 && mousepos.x <= 460 && mousepos.y >= 215 && mousepos.y <= 274)
 			{
-				window.close(); rees.restart(isSoundOn, isSoundOff); icon = true;
+				window.close(); music.pause(); rees.restart(isSoundOn, isSoundOff); icon = true;
 			}
 
 			// Sound Tabs
@@ -164,11 +174,14 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 			if (isSoundOff == 0 && isSoundOn == 1 && icon == false)
 			{
 				SoundOn.setPosition(677, 109);	window.draw(SoundOn);
+
 			}
 			else if (isSoundOn == 0 && isSoundOff == 1 && icon == false)
 			{
 				SoundOff.setPosition(677, 109); window.draw(SoundOff);
 			}
+			if (isSoundOn == 1 && isSoundOff == 0 && mc == 1) { music.play(); mc = 0; }
+			if (isSoundOn == 0 && isSoundOff == 1 && mc == 0) { music.pause(); mc = 1; }
 
 			if (icon)
 			{
@@ -320,8 +333,10 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 
 							}
 							counter++;
+							put.play();
 						}
 					}
+
 				}
 				window.draw(piece);
 			}
@@ -330,5 +345,6 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 		}
 	}
 }
+
 
 //modification for each paste "bool icon = true" , "res---> rees"x2
