@@ -19,16 +19,16 @@ Reset res;
 
 int main()
 {
-	RenderWindow start_up(VideoMode(970, 546), "CHESS-THE GAME OF KINGS");
-	//Texture StartUp;	StartUp.loadFromFile("textures/Start_Up.png");
-	//Sprite startUp;	startUp.setTexture(StartUp);
-	/*while (start_up.isOpen()) {
+	RenderWindow start_up(VideoMode(736, 534), "CHESS-THE GAME OF KINGS");
+	Texture StartUp;	StartUp.loadFromFile("textures/TreeStartUp.png");
+	Sprite startUp;	startUp.setTexture(StartUp);
+	while (start_up.isOpen()) {
 
 		for (long long i = 0; i < 4000; i++) {
 			start_up.clear(); start_up.draw(startUp); start_up.display();
 		}
 		start_up.close();
-	}*/
+	}
 
 
 
