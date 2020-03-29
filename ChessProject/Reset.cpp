@@ -284,7 +284,8 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 					}
 
 				}
-
+				if (counter % 2 == 0) { validmove.setFillColor(Color::White); }
+				else { validmove.setFillColor(Color::Black); }
 				if (!Mouse::isButtonPressed(Mouse::Right) && valid_disappear == false) {
 					for (int i = 0; i < Clik.size(); i++) {
 						validmove.setPosition(Clik[i].first, Clik[i].second);
@@ -322,8 +323,6 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 						}
 					}
 				}
-				//if (Mouse::isButtonPressed(Mouse::Left)) { XY_clickpos.first = 0; XY_clickpos.second = 0; }
-
 				window.draw(piece);
 			}
 			window.display();
