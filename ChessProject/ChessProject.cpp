@@ -203,6 +203,7 @@ int main()
 
 			if (icon)
 			{
+
 				window.clear();
 				window.draw(back);
 				for (int i = 1; i < 9; i++) {
@@ -287,7 +288,7 @@ int main()
 
 				}
 
-				// Kareem : drawing the pieces according their board positionsc
+				// Kareem : drawing the pieces according their board positions
 
 
 				if (Mouse::isButtonPressed(Mouse::Right)) {
@@ -341,7 +342,7 @@ int main()
 						}
 					}
 				}
-				
+
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
 					valid_disappear = true;
@@ -349,7 +350,7 @@ int main()
 					getAvailableSquares getAvailable = getAvailableSquares(board1.board[(int)XY_clickpos.first][(int)XY_clickpos.second], board1);
 					vector<pair<ll, ll>>  ans = getAvailable.getSquares();
 					cout << "vector size is #####################################################################################                 " << ans.size() << endl;
-					
+
 					for (auto elem : ans)
 					{
 						cout << "INNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" << endl;
@@ -360,7 +361,7 @@ int main()
 							if (counter % 2 != 0 && currentPiece.team != "Black") break;
 							valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
 							cout << "INNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" << endl;
-							
+
 							board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
 							bool isCheckMated = Gameplay::isKingCheckmated({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
 							if (isCheckMated) {

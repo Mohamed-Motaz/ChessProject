@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>>
+#include "Reset.h"
 
 Gameplay::Gameplay() {
 
@@ -65,6 +66,23 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 							//checkmate
 							cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
 							board1.board[startingPosition.first][startingPosition.second].isAlive = false;
+							//Kareem : the checkmate window law 3ayz el 2byd 5aly el sora "whiteWin"
+							Reset checkres;
+							RenderWindow CheckMate(VideoMode(650, 459), "CHESS-THE GAME OF KINGS");
+							Texture Checkmate;	Checkmate.loadFromFile("textures/blackWin.png");
+							Sprite checkmate;	checkmate.setTexture(Checkmate);
+							while (CheckMate.isOpen()) {
+								CheckMate.clear(); CheckMate.draw(checkmate); CheckMate.display();
+								Vector2i mousepos = Mouse::getPosition(CheckMate);
+								if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 119 && mousepos.x < 297 && mousepos.y>339 && mousepos.y < 398)
+								{
+									CheckMate.close();  checkres.restart(1, 0);
+								}
+								if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 337 && mousepos.x < 519 && mousepos.y>338 && mousepos.y < 397)
+								{
+									CheckMate.close();
+								}
+							}
 							//return board1;
 							//###############################################################################################################################################################################
 							//##################################################################################MUST CHECK IF KING IS DEAD###################################################################
@@ -74,7 +92,7 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 				}
 			}
 		}
-		
+
 		//Case 1 of checkmate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		chessPiece king = board1.board[startingPosition.first][startingPosition.second];
 
@@ -127,6 +145,24 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 		if (numberofUnavaliable == ans.size() && attackers > 1) {
 			cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
 			//return board1; //true, checkmate occured
+			//Kareem : the checkmate window law 3ayz el 2byd 5aly el sora "whiteWin"
+			Reset checkres;
+			RenderWindow CheckMate(VideoMode(650, 459), "CHESS-THE GAME OF KINGS");
+			Texture Checkmate;	Checkmate.loadFromFile("textures/blackWin.png");
+			Sprite checkmate;	checkmate.setTexture(Checkmate);
+			while (CheckMate.isOpen()) {
+				CheckMate.clear(); CheckMate.draw(checkmate); CheckMate.display();
+				Vector2i mousepos = Mouse::getPosition(CheckMate);
+				if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 119 && mousepos.x < 297 && mousepos.y>339 && mousepos.y < 398)
+				{
+					CheckMate.close();  checkres.restart(1, 0);
+				}
+				if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 337 && mousepos.x < 519 && mousepos.y>338 && mousepos.y < 397)
+				{
+					CheckMate.close();
+				}
+			}
+			//////
 		}
 	}
 	cout << "starting position for piece " << currentPiece.team << " " << currentPiece.type << " is " << startingPosition.first << " " << startingPosition.second << endl;
@@ -142,15 +178,15 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 }
 
 
-bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targetPosition, Board board1)
+bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1)
 {
 	cout << "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAy" << endl;
 	//chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
 	//Case 1: King is attacked
 	//		  No available squares
 	//		  No piece can block the attack
-	
-	
+
+
 	//Case 2: King moves to attacked position
 	//implemented in MovePiece method
 	//cout << "innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" << endl;
@@ -180,9 +216,9 @@ bool Gameplay::isKingCheckmated(pair<ll, ll> startingPosition, pair<ll,ll> targe
 	//		}
 	//	}
 	//}
-	
-		
-	
+
+
+
 	//Case 3: Only king can attack piece BUT piece is defended
 	//already taken care of
 	return false;
