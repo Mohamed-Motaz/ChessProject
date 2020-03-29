@@ -321,7 +321,7 @@ bool Reset::restart(bool isSoundOn_restart, bool isSoundOff_restart)
 							if (counter % 2 == 0 && currentPiece.team != "White") break;
 							if (counter % 2 != 0 && currentPiece.team != "Black") break;
 							valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
-							board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
+							board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1, counter);
 							cout << valid_clickpos.first << "  " << valid_clickpos.second << endl;
 							for (int x = 1; x <= 8; x++) {
 								for (int z = 1; z <= 8; z++) {

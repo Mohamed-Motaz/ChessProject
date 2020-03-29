@@ -44,7 +44,7 @@ pair<pair<ll, ll>, pair<ll, ll>> Gameplay::InputStartingPositionAndTargetPositio
 	return { StartingPosition, TargetPosition };
 }
 
-Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1)
+Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosition, Board board1, ll counter)
 {
 	chessPiece currentPiece = board1.board[startingPosition.first][startingPosition.second];
 
@@ -69,7 +69,11 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 							//Kareem : the checkmate window law 3ayz el 2byd 5aly el sora "whiteWin"
 							Reset checkres;
 							RenderWindow CheckMate(VideoMode(650, 459), "CHESS-THE GAME OF KINGS");
-							Texture Checkmate;	Checkmate.loadFromFile("textures/blackWin.png");
+							Texture Checkmate;	
+							if (counter % 2 == 0)
+								Checkmate.loadFromFile("textures/blackWin.png");
+							else
+								Checkmate.loadFromFile("textures/whiteWin.png");
 							Sprite checkmate;	checkmate.setTexture(Checkmate);
 							while (CheckMate.isOpen()) {
 								CheckMate.clear(); CheckMate.draw(checkmate); CheckMate.display();
@@ -93,77 +97,99 @@ Board Gameplay::MovePiece(pair<ll, ll> startingPosition, pair<ll, ll> targetPosi
 			}
 		}
 
-		//Case 1 of checkmate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		chessPiece king = board1.board[startingPosition.first][startingPosition.second];
+		
+	}
+	//Case 1 of checkmate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	chessPiece king;
+	cout << "currentpeice team: " << currentPiece.type << " : " << currentPiece.team << endl;
+	for (int i = 1; i <= 8; i++) {
+		for (int j = 1; j <= 8; j++) {
+			if (board1.board[i][j].type == "King" && board1.board[i][j].team != currentPiece.team) {
+				king = board1.board[i][j];
+				break;
+			}
+		}
+	}
+	cout << "KINGSSSS    " << king.type << " " << king.team << endl;
 
-		bool attacked = false;
-		int attackers = 0;
-		//king is attacked
+	bool attacked = false;
+	int attackers = 0;
+	//king is attacked
+	vector<pair<ll, ll>> ans1;
+	for (int i = 1; i <= 8; i++) {
+		for (int j = 1; j <= 8; j++) {
+			//chessPiece currentPiece = board1.board[i][j];
+			if (board1.board[i][j].team != king.team && board1.board[i][j].type.size() != 0) {
+				getAvailableSquares getAvailable(board1.board[i][j], board1);
+				ans1.clear();
+				ans1 = getAvailable.getSquares();
+				cout << ans1.size() << endl;
+				for (auto elem : ans1) {
+					if (elem.first == king.position.first && elem.second == king.position.second) {
+						attacked = true;
+						attackers++;
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	if (!attacked) {
+		//return board1; //false no checkmate
+	}
+	//get available squares fir king
+	getAvailableSquares getAvailable(king, board1);
+	vector<pair<ll, ll>> ans = getAvailable.getSquares();
+	int numberofUnavaliable = 0;
+	for (auto elem : ans) {
+		bool notAvaliable = false;
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
 				chessPiece currentPiece = board1.board[i][j];
 				if (currentPiece.team != king.team && currentPiece.team.size() != 0) {
+					cout << "PIECEEEEEEEEEEEEEEEE: " << currentPiece.team << ": " << currentPiece.type << endl;
 					getAvailableSquares getAvailable(currentPiece, board1);
-					vector<pair<ll, ll>> ans = getAvailable.getSquares();
-					for (auto elem : ans) {
-						if (elem.first == king.position.first && elem.second == king.position.second) {
-							attacked = true;
-							attackers++;
+					vector<pair<ll, ll>> answer = getAvailable.getSquares();
+					cout << "ans size: " << ans.size() << endl;
+					cout << ans[0].first << " "<< ans[0].second << endl;
+					
+					for (auto elemen : answer) {
+						if (elemen.first == elem.first && elemen.second == elem.second) {
+							cout << "innnnnnnnnnnnnnnnnnnnnnnnnnn" << endl;
+							notAvaliable = true;
+							numberofUnavaliable++;
 							break;
 						}
 					}
 				}
 			}
 		}
-		if (!attacked) {
-			//return board1; //false no checkmate
-		}
-		//get available squares fir king
-		getAvailableSquares getAvailable(king, board1);
-		vector<pair<ll, ll>> ans = getAvailable.getSquares();
-		int numberofUnavaliable = 0;
-		for (auto elem : ans) {
-			bool notAvaliable = false;
-			for (int i = 1; i <= 8; i++) {
-				for (int j = 1; j <= 8; j++) {
-					chessPiece currentPiece = board1.board[i][j];
-					if (currentPiece.team != king.team && currentPiece.team.size() != 0) {
-						getAvailableSquares getAvailable(currentPiece, board1);
-						vector<pair<ll, ll>> answer = getAvailable.getSquares();
-						for (auto elemen : answer) {
-							if (elemen.first == elem.first && elemen.second == elem.second) {
-								notAvaliable = true;
-								break;
-							}
-						}
-					}
-				}
+		if (notAvaliable)
+			numberofUnavaliable++;
+	}
+	cout << "NUMBER UNAVILABLE = " << numberofUnavaliable << "    ans.size " << ans.size() << "   attackers : "<< attackers << endl;
+	if (numberofUnavaliable == ans.size() && attackers > 1) {
+		cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
+		//return board1; //true, checkmate occured
+		//Kareem : the checkmate window law 3ayz el 2byd 5aly el sora "whiteWin"
+		Reset checkres;
+		RenderWindow CheckMate(VideoMode(650, 459), "CHESS-THE GAME OF KINGS");
+		Texture Checkmate;	Checkmate.loadFromFile("textures/blackWin.png");
+		Sprite checkmate;	checkmate.setTexture(Checkmate);
+		while (CheckMate.isOpen()) {
+			CheckMate.clear(); CheckMate.draw(checkmate); CheckMate.display();
+			Vector2i mousepos = Mouse::getPosition(CheckMate);
+			if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 119 && mousepos.x < 297 && mousepos.y>339 && mousepos.y < 398)
+			{
+				CheckMate.close();  checkres.restart(1, 0);
 			}
-			if (notAvaliable)
-				numberofUnavaliable++;
-		}
-		if (numberofUnavaliable == ans.size() && attackers > 1) {
-			cout << "CHECKMATYEEEEEEEEEEEEEEEEEEEEEE" << endl;
-			//return board1; //true, checkmate occured
-			//Kareem : the checkmate window law 3ayz el 2byd 5aly el sora "whiteWin"
-			Reset checkres;
-			RenderWindow CheckMate(VideoMode(650, 459), "CHESS-THE GAME OF KINGS");
-			Texture Checkmate;	Checkmate.loadFromFile("textures/blackWin.png");
-			Sprite checkmate;	checkmate.setTexture(Checkmate);
-			while (CheckMate.isOpen()) {
-				CheckMate.clear(); CheckMate.draw(checkmate); CheckMate.display();
-				Vector2i mousepos = Mouse::getPosition(CheckMate);
-				if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 119 && mousepos.x < 297 && mousepos.y>339 && mousepos.y < 398)
-				{
-					CheckMate.close();  checkres.restart(1, 0);
-				}
-				if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 337 && mousepos.x < 519 && mousepos.y>338 && mousepos.y < 397)
-				{
-					CheckMate.close();
-				}
+			if (Mouse::isButtonPressed(Mouse::Left) && mousepos.x > 337 && mousepos.x < 519 && mousepos.y>338 && mousepos.y < 397)
+			{
+				CheckMate.close();
 			}
-			//////
 		}
+		//////
 	}
 	cout << "starting position for piece " << currentPiece.team << " " << currentPiece.type << " is " << startingPosition.first << " " << startingPosition.second << endl;
 	cout << "target position is " << targetPosition.first << " " << targetPosition.second << endl;

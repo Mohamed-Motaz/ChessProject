@@ -369,7 +369,7 @@ int main()
 							valid_clickpos.first = elem.first; valid_clickpos.second = elem.second;
 							cout << "INNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" << endl;
 
-							board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
+							board1 = Gameplay::MovePiece({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1, counter);
 							bool isCheckMated = Gameplay::isKingCheckmated({ XY_clickpos.first, XY_clickpos.second }, { valid_clickpos.first, valid_clickpos.second }, board1);
 							if (isCheckMated) {
 								cout << "KING IS NOW IN CHECKMATE  ################################################################" << endl;
